@@ -1,2 +1,2 @@
-# 4th-Year-Mobile-Application-Development-Project
-This project is for my 4th year Mobile Application Development module in college.
+# Mobile Application Development Project
+This project is for my 4th year Mobile Application Development module in college. The requirements of this project is to develop a mobile application that runs on the Universal Windows Platform. This mobile application must also interact with some web service hosted on Azure. This web service can be written in any language.
