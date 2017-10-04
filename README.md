@@ -30,3 +30,29 @@ The main enhancement for this project is orientated around also extracting the t
 1. The text extraction must be more accurate.
 2. Currency may be harder to identify in a string of text.
 3. Implementing this functionality will be time-consuming.
+
+## Getting Started
+This section will outline the steps involved in setting up the project on your local machine for development purposes. The first step is to clone the repository.
+
+```
+git clone https://github.com/KeithWilliamsGMIT/4th-Year-Mobile-Application-Development-Project.git
+cd 4th-Year-Mobile-Application-Development-Project
+```
+
+### Web Service
+First ensure you have Python 3 installed. The easiest way to install Python is through [Anaconda](https://www.anaconda.com/downloads). Next create a virtual environment in the backend folder to store all the required packages. Once created, activate the new environment using the `source` command and install the packages listed in the `requirements.txt` file.
+
+```
+cd backend
+
+# Create the virtual environment
+virtualenv -p python3 venv
+
+# Activate the environment
+source venv/bin/activate
+
+# Install the requirements
+pip3 install -r requirements.txt
+```
+
+Before starting the web service you will also need to download the Tesseract OCR library on which it depends. The [instructions](https://github.com/tesseract-ocr/tesseract/wiki) are available on the project wiki on GitHub.
