@@ -1,13 +1,16 @@
 # Mobile Application Development Project
-This project is for my 4th year Mobile Application Development module in college. The requirements of this project is to develop a mobile application that runs on the Universal Windows Platform. This mobile application must also interact with some web service hosted on Azure. This web service can be written in any language. The mobile application must be **submitted** for certification to the Windows Store by the given deadline.
+This project is for my 4th year Mobile Application Development module in college. This README outlines some of the high level detail of the project. More information is available on the project [wiki](https://github.com/KeithWilliamsGMIT/4th-Year-Mobile-Application-Development-Project/wiki).
+
+## Requirements
+The requirements of this project is to develop a mobile application that runs on the Universal Windows Platform. This mobile application must also interact with some web service hosted on Azure. This web service can be written in any language. The mobile application must be **submitted** for certification to the Windows Store by the given deadline.
 
 ## Objectives
 The objectives I've outlined for this project are listed below.
-* Create a cross platform app using the Xamarin framework.
+* Create a cross-platform app using the Xamarin framework.
 * Use an additional external service.
 * Use at least one device sensor.
-* Utitise the GitHub Flow workflow for managing the development of this project.
-* Develop the application in an iterative and incrementive manner.
+* Utilise the GitHub Flow workflow for managing the development of this project.
+* Develop the application in an iterative and incremental manner.
 * Submit the finished application to Windows Store and Play Store.
 
 ## Project proposal
@@ -26,4 +29,30 @@ The purpose of this project is to help users track and manage expenses.
 The main enhancement for this project is orientated around also extracting the total expense, and possibly the expense of each individual item, from the receipt. This information can then be used to provide a visual representation of spending over time. However, the problems with implementing this feature are as follows:
 1. The text extraction must be more accurate.
 2. Currency may be harder to identify in a string of text.
-3. Implementing this functionality will be time consuming.
+3. Implementing this functionality will be time-consuming.
+
+## Getting Started
+This section will outline the steps involved in setting up the project on your local machine for development purposes. The first step is to clone the repository.
+
+```
+git clone https://github.com/KeithWilliamsGMIT/4th-Year-Mobile-Application-Development-Project.git
+cd 4th-Year-Mobile-Application-Development-Project
+```
+
+### Web Service
+First ensure you have Python 3 installed. The easiest way to install Python is through [Anaconda](https://www.anaconda.com/downloads). Next create a virtual environment in the backend folder to store all the required packages. Once created, activate the new environment using the `source` command and install the packages listed in the `requirements.txt` file.
+
+```
+cd backend
+
+# Create the virtual environment
+virtualenv -p python3 venv
+
+# Activate the environment
+source venv/bin/activate
+
+# Install the requirements
+pip3 install -r requirements.txt
+```
+
+Before starting the web service you will also need to download the Tesseract OCR library on which it depends. The [instructions](https://github.com/tesseract-ocr/tesseract/wiki) are available on the project wiki on GitHub.
