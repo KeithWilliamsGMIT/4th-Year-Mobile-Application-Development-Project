@@ -55,7 +55,7 @@ source venv/bin/activate
 pip3 install -r requirements.txt
 ```
 
-Before starting the web service you will also need to download the Tesseract OCR library on which it depends. The [instructions](https://github.com/tesseract-ocr/tesseract/wiki) are available on the project wiki on GitHub. Use the below commands to start the web service.
+Before starting the web service you will also need to download the Tesseract OCR library on which it depends. The [instructions](https://github.com/tesseract-ocr/tesseract/wiki) are available on the project wiki on GitHub. A local instance of MongoDB must also be running. Instructions for installing MongoDB can be found on the online [manual](https://docs.mongodb.com/manual/installation/). Finally, use the below commands to start the web service.
 
 ```
 cd app
