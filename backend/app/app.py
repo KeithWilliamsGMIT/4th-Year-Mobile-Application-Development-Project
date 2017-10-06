@@ -10,16 +10,16 @@ app = Flask(__name__)
 # POST - Return all the users receipts.
 @app.route('/api/<user>/receipts', methods=['GET'])
 def receipts(user):
-	return '[GET] receipts for ' + user
+	return '[GET] receipts'
 
 # GET - Return a requested receipt if it exists.
 # POST - Add the given receipt to the users list of receipts.
 @app.route('/api/<user>/receipt', methods=['GET', 'POST'])
 def receipt(user):
 	if request.method == 'GET':
-		return '[GET] receipt for ' + user
+		return '[GET] receipt'
 	else:
-		return '[POST] receipt for ' + user
+		return '[POST] receipt'
 
 # Only run if this is the main module.
 if __name__ == '__main__':
