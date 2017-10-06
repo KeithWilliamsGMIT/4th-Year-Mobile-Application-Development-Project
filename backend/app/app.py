@@ -1,5 +1,5 @@
 # Author:		Keith Williams
-# Date:			02/09/2017
+# Date:			04/10/2017
 # Description:	Define the API for the web service.
 
 from flask import Flask, request
@@ -8,18 +8,18 @@ import os
 app = Flask(__name__)
 
 # POST - Return all the users receipts.
-@app.route('/api/receipts', methods=['GET'])
-def receipts():
-	return '[GET] receipts'
+@app.route('/api/<user>/receipts', methods=['GET'])
+def receipts(user):
+	return '[GET] receipts for ' + user
 
 # GET - Return a requested receipt if it exists.
 # POST - Add the given receipt to the users list of receipts.
-@app.route('/api/receipt', methods=['GET', 'POST'])
-def receipt():
+@app.route('/api/<user>/receipt', methods=['GET', 'POST'])
+def receipt(user):
 	if request.method == 'GET':
-		return '[GET] receipt'
+		return '[GET] receipt for ' + user
 	else:
-		return '[POST] receipt'
+		return '[POST] receipt for ' + user
 
 # Only run if this is the main module.
 if __name__ == '__main__':
