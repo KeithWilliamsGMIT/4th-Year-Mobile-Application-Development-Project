@@ -5,21 +5,29 @@
 from flask import Flask, request
 import os
 
+from database import retrieve_receipt, create_receipt
+
 app = Flask(__name__)
 
 # POST - Return all the users receipts.
 @app.route('/api/<user>/receipts', methods=['GET'])
-def receipts(user):
-	return '[GET] receipts'
+def get_receipts(user):
+	return '[GET] receipts for ' + user
 
 # GET - Return a requested receipt if it exists.
+@app.route('/api/<user>/receipt/<receipt>', methods=['GET'])
+def get_receipt(user, receipt):
+	message = retrieve_receipt(receipt)
+	
+	if message is None:
+		message = 'No receipt with id ' + receipt + ' found!'
+	
+	return '[GET] receipt for ' + user + ' - ' + message
+
 # POST - Add the given receipt to the users list of receipts.
-@app.route('/api/<user>/receipt', methods=['GET', 'POST'])
-def receipt(user):
-	if request.method == 'GET':
-		return '[GET] receipt'
-	else:
-		return '[POST] receipt'
+@app.route('/api/<user>/receipt', methods=['POST'])
+def post_receipt(user):
+	return '[POST] receipt for ' + user
 
 # Only run if this is the main module.
 if __name__ == '__main__':

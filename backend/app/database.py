@@ -19,13 +19,12 @@ mongodb = mongo['receipt-database']
 # Get the collection of receipts
 receipt_collection = mongodb['receipt-collection']
 
-# Create a new receipt document in MongoDB.
-def post_receipt(data):
-	receipt_collection.insert_one(data)
-
 # Return a receipt document with a matching receipt_id.
 # If no receipt matching the query is found return None.
-def get_receipt(receipt_id):
+def retrieve_receipt(receipt_id):
 	receipt = receipt_collection.find_one({'receipt_id': receipt_id})
 	
 	return receipt
+# Create a new receipt document in MongoDB.
+def create_receipt(data):
+	receipt_collection.insert_one(data)
