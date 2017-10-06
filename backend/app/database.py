@@ -25,6 +25,7 @@ def retrieve_receipt(receipt_id):
 	receipt = receipt_collection.find_one({'receipt_id': receipt_id})
 	
 	return receipt
+
 # Create a new receipt document in MongoDB.
 def create_receipt(data):
 	receipt_collection.insert_one(data)

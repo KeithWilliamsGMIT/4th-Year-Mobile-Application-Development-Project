@@ -36,5 +36,5 @@ if __name__ == '__main__':
 	# The secret key is used to generate access tokens
 	app.secret_key = os.urandom(24)
 	
-	# Set the host to 0.0.0.0 to make it accessible to other
+	# Set the host to 0.0.0.0 to make it accessible when deployed
 	app.run(host="0.0.0.0", threaded=True)
