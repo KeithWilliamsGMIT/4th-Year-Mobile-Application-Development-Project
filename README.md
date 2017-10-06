@@ -55,4 +55,11 @@ source venv/bin/activate
 pip3 install -r requirements.txt
 ```
 
-Before starting the web service you will also need to download the Tesseract OCR library on which it depends. The [instructions](https://github.com/tesseract-ocr/tesseract/wiki) are available on the project wiki on GitHub.
+Before starting the web service you will also need to download the Tesseract OCR library on which it depends. The [instructions](https://github.com/tesseract-ocr/tesseract/wiki) are available on the project wiki on GitHub. Use the below commands to start the web service.
+
+```
+cd app
+python3 app.py
+```
+
+The web service should now be running on [http://0.0.0.0:5000](http://0.0.0.0:5000).
