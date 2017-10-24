@@ -4,10 +4,21 @@
              xmlns:local="clr-namespace:DigiReceipt"
              x:Class="DigiReceipt.MainPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <StackLayout Orientation="Horizontal" Style="{StaticResource header}">
+                <Label Text="DigiReceipt" Style="{StaticResource headerBranding}"/>
+            </StackLayout>
+
+            <!-- Content -->
+            <StackLayout Grid.Row="1" Style="{StaticResource content}">
+                
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
