@@ -13,5 +13,15 @@ namespace DigiReceipt
         {
             InitializeComponent();
         }
+
+        /// <summary>
+        /// Navigate to the ViewReceipts page when the event is fired.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public async void OnLogin(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ViewReceipts());
+        }
     }
 }
