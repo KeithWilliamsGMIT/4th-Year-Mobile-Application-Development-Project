@@ -6,19 +6,7 @@
 
 		<!-- Application resource dictionary -->
         <ResourceDictionary>
-            <Style x:Key="header" TargetType="StackLayout">
-                <Setter Property="BackgroundColor" Value="Gold"/>
-                <Setter Property="Padding" Value="10"/>
-            </Style>
-
-            <Style x:Key="headerBranding" TargetType="Label">
-                <Setter Property="TextColor" Value="White"/>
-                <Setter Property="FontSize" Value="20"/>
-                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
-                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
-            </Style>
-
-            <Style x:Key="content" TargetType="StackLayout">
+            <Style x:Key="PageStyle" TargetType="ContentPage">
                 <Setter Property="BackgroundColor" Value="White"/>
             </Style>
         </ResourceDictionary>

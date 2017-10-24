@@ -18,11 +18,11 @@ namespace DigiReceipt
         }
 
         /// <summary>
-        /// Navigate back to the MainPage page when the event is fired.
+        /// Navigate back to the Login page when the event is fired.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public async void OnSignOut(object sender, EventArgs e)
+        public async void OnLogout(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
         }
