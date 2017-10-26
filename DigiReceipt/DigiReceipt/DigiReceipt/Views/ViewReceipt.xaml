@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:DigiReceipt"
              x:Class="DigiReceipt.ViewReceipt"
              Style="{StaticResource PageStyle}"
-             Title="Receipt">
+             Title="{local:Translate txtViewReceiptPageTitle}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Back" Icon="Icons/back.png" Clicked="OnBack"/>
-        <ToolbarItem Text="Add Receipt" Icon="Icons/add.png" Clicked="OnAddReceipt"/>
+        <ToolbarItem Text="{local:Translate txtBackButton}" Icon="Icons/back.png" Clicked="OnBack"/>
+        <ToolbarItem Text="{local:Translate txtAddReceiptButton}" Icon="Icons/add.png" Clicked="OnAddReceipt"/>
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>

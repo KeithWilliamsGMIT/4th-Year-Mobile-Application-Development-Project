@@ -4,10 +4,10 @@
              xmlns:local="clr-namespace:DigiReceipt"
              x:Class="DigiReceipt.Login"
              Style="{StaticResource PageStyle}"
-             Title="DigiReceipt">
+             Title="{local:Translate txtLoginPageTitle}">
     <ContentPage.Content>
         <StackLayout>
-            <Button Text="Login" Clicked="OnLogin"/>
+            <Button Text="{local:Translate txtLoginButton}" Clicked="OnLogin"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
