@@ -40,10 +40,10 @@ cd 4th-Year-Mobile-Application-Development-Project
 ```
 
 ### Web Service
-First ensure you have Python 3 installed. The easiest way to install Python is through [Anaconda](https://www.anaconda.com/downloads). Next create a virtual environment in the backend folder to store all the required packages. Once created, activate the new environment using the `source` command and install the packages listed in the `requirements.txt` file.
+First ensure you have Python 3 installed. The easiest way to install Python is through [Anaconda](https://www.anaconda.com/downloads). Next create a virtual environment in the web-service folder to store all the required packages. Once created, activate the new environment using the `source` command and install the packages listed in the `requirements.txt` file.
 
 ```
-cd backend
+cd web-service
 
 # Create the virtual environment
 virtualenv -p python3 venv

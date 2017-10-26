@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:DigiReceipt"
+             x:Class="DigiReceipt.ViewReceipts"
+             Style="{StaticResource PageStyle}"
+             Title="{local:Translate txtViewReceiptsPageTitle}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{local:Translate txtLogoutButton}" Icon="Icons/logout.png" Clicked="OnLogout"/>
+        <ToolbarItem Text="{local:Translate txtAddReceiptButton}" Icon="Icons/add.png" Clicked="OnAddReceipt"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Button Text="{local:Translate txtViewReceiptButton}" Clicked="OnViewReceipt"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
