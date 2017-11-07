@@ -21,9 +21,6 @@ namespace DigiReceipt.UWP
 {
     public sealed partial class MainPage : IAuthenticate
     {
-        // Define an authenticated user.
-        private MobileServiceUser user;
-
         public MainPage()
         {
             this.InitializeComponent();
@@ -41,11 +38,11 @@ namespace DigiReceipt.UWP
             try
             {
                 // Login with Google using a server-managed flow.
-                if (user == null)
+                if (AuthenticationManager.DefaultAuthenticationManager.CurrentUser == null)
                 {
-                    user = await DigiReceipt.App.MobileService.LoginAsync(MobileServiceAuthenticationProvider.Google, "digireceipt");
+                    AuthenticationManager.DefaultAuthenticationManager.CurrentUser = await AuthenticationManager.DefaultAuthenticationManager.CurrentClient.LoginAsync(MobileServiceAuthenticationProvider.Google, "digireceipt");
 
-                    if (user != null)
+                    if (AuthenticationManager.DefaultAuthenticationManager.CurrentUser != null)
                     {
                         success = true;
                     }

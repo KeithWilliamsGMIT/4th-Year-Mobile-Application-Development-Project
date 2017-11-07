@@ -112,7 +112,7 @@ namespace DigiReceipt.UWP
             if (args.Kind == ActivationKind.Protocol)
             {
                 ProtocolActivatedEventArgs protocolArgs = args as ProtocolActivatedEventArgs;
-                DigiReceipt.App.MobileService.ResumeWithURL(protocolArgs.Uri);
+                AuthenticationManager.DefaultAuthenticationManager.CurrentClient.ResumeWithURL(protocolArgs.Uri);
             }
         }
     }

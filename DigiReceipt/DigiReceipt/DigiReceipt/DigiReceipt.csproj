@@ -35,6 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AuthenticationManager.cs" />
     <Compile Include="IAuthenticate.cs" />
     <Compile Include="Resx\AppResources.Designer.cs">
       <AutoGen>True</AutoGen>

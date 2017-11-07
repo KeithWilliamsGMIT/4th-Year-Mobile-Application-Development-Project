@@ -24,6 +24,9 @@ namespace DigiReceipt
         /// <param name="e"></param>
         public async void OnLogout(object sender, EventArgs e)
         {
+            await AuthenticationManager.DefaultAuthenticationManager.CurrentClient.LogoutAsync();
+            AuthenticationManager.DefaultAuthenticationManager.CurrentUser = null;
+            AuthenticationManager.DefaultAuthenticationManager.IsAuthenticated = false;
             await Navigation.PopAsync();
         }
 

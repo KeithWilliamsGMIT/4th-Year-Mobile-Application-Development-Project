@@ -12,8 +12,6 @@ namespace DigiReceipt
     {
         public static IAuthenticate Authenticator { get; private set; }
 
-        public static MobileServiceClient MobileService = new MobileServiceClient("https://digireceipt.azurewebsites.net");
-
         public App()
         {
             InitializeComponent();
