@@ -9,6 +9,9 @@ namespace DigiReceipt
 {
     public partial class Login : ContentPage
     {
+        // Track whether the user has authenticated.
+        bool authenticated = false;
+
         public Login()
         {
             InitializeComponent();
@@ -21,7 +24,11 @@ namespace DigiReceipt
         /// <param name="e"></param>
         public async void OnLogin(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new ViewReceipts());
+            if (App.Authenticator != null)
+                authenticated = await App.Authenticator.Authenticate();
+            
+            if (authenticated == true)
+                await Navigation.PushAsync(new ViewReceipts());
         }
     }
 }

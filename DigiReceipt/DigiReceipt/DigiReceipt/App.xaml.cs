@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.WindowsAzure.MobileServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,10 @@ namespace DigiReceipt
 {
     public partial class App : Application
     {
+        public static IAuthenticate Authenticator { get; private set; }
+
+        public static MobileServiceClient MobileService = new MobileServiceClient("https://digireceipt.azurewebsites.net");
+
         public App()
         {
             InitializeComponent();
@@ -18,6 +23,11 @@ namespace DigiReceipt
                 BarBackgroundColor = Color.Gold,
                 BarTextColor = Color.White
             };
+        }
+
+        public static void Init(IAuthenticate authenticator)
+        {
+            Authenticator = authenticator;
         }
 
         protected override void OnStart()

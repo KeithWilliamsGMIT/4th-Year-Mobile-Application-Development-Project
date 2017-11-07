@@ -110,6 +110,7 @@
   <ItemGroup>
     <Content Include="Icons\add.png" />
     <Content Include="Icons\back.png" />
+    <Content Include="Icons\google.png" />
     <Content Include="Icons\logout.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-100.png" />
@@ -160,6 +161,7 @@
       <Name>DigiReceipt</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
