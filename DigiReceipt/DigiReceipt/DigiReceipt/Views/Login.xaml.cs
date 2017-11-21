@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.WindowsAzure.MobileServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,14 +24,33 @@ namespace DigiReceipt
         }
 
         /// <summary>
-        /// Authenticate the user and attempt to navigate to the next page.
+        /// Authenticate the user using Google.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public async void OnLogin(object sender, EventArgs e)
+        public void OnLoginWithGoogle(object sender, EventArgs e)
+        {
+            LoginUser(MobileServiceAuthenticationProvider.Google);
+        }
+
+        /// <summary>
+        /// Authenticate the user using Microsoft.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void OnLoginWithMicrosoft(object sender, EventArgs e)
+        {
+            LoginUser(MobileServiceAuthenticationProvider.MicrosoftAccount);
+        }
+
+        /// <summary>
+        /// Attempt login and navigate to the next page.
+        /// </summary>
+        /// <param name="provider"></param>
+        private async void LoginUser(MobileServiceAuthenticationProvider provider)
         {
             if (App.Authenticator != null)
-                AuthenticationManager.DefaultAuthenticationManager.IsAuthenticated = await App.Authenticator.Authenticate();
+                AuthenticationManager.DefaultAuthenticationManager.IsAuthenticated = await App.Authenticator.Authenticate(provider);
 
             if (AuthenticationManager.DefaultAuthenticationManager.IsAuthenticated)
                 NavigateViewReceipts();

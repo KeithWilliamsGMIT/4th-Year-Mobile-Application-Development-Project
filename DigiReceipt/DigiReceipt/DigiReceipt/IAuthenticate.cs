@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using Microsoft.WindowsAzure.MobileServices;
+using System.Threading.Tasks;
 
 namespace DigiReceipt
 {
     public interface IAuthenticate
     {
-        Task<bool> Authenticate();
+        Task<bool> Authenticate(MobileServiceAuthenticationProvider provider);
     }
 }

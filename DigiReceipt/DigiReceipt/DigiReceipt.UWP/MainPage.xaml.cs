@@ -31,16 +31,16 @@ namespace DigiReceipt.UWP
             LoadApplication(new DigiReceipt.App());
         }
 
-        public async Task<bool> Authenticate()
+        public async Task<bool> Authenticate(MobileServiceAuthenticationProvider provider)
         {
             var success = false;
 
             try
             {
-                // Login with Google using a server-managed flow.
+                // Login with the given provider using a server-managed flow.
                 if (AuthenticationManager.DefaultAuthenticationManager.CurrentUser == null)
                 {
-                    AuthenticationManager.DefaultAuthenticationManager.CurrentUser = await AuthenticationManager.DefaultAuthenticationManager.CurrentClient.LoginAsync(MobileServiceAuthenticationProvider.Google, "digireceipt");
+                    AuthenticationManager.DefaultAuthenticationManager.CurrentUser = await AuthenticationManager.DefaultAuthenticationManager.CurrentClient.LoginAsync(provider, "digireceipt");
 
                     if (AuthenticationManager.DefaultAuthenticationManager.CurrentUser != null)
                     {

@@ -89,20 +89,29 @@ namespace DigiReceipt.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Login.
-        /// </summary>
-        internal static string txtLoginButton {
-            get {
-                return ResourceManager.GetString("txtLoginButton", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to DigiReceipt.
         /// </summary>
         internal static string txtLoginPageTitle {
             get {
                 return ResourceManager.GetString("txtLoginPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login with Google.
+        /// </summary>
+        internal static string txtLoginWithGoogleButton {
+            get {
+                return ResourceManager.GetString("txtLoginWithGoogleButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login with Microsoft.
+        /// </summary>
+        internal static string txtLoginWithMicrosoftButton {
+            get {
+                return ResourceManager.GetString("txtLoginWithMicrosoftButton", resourceCulture);
             }
         }
         
