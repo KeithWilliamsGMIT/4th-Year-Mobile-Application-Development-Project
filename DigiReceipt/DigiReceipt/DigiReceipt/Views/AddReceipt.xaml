@@ -10,8 +10,13 @@
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
-        <StackLayout>
-            
-        </StackLayout>
+        <ScrollView>
+            <StackLayout>
+                <RelativeLayout BackgroundColor="Black" HorizontalOptions="CenterAndExpand" VerticalOptions="Start">
+                    <Image x:Name="imgReceiptPhoto" HorizontalOptions="Center" HeightRequest="250"/>
+                </RelativeLayout>
+                <Button Text="{local:Translate txtTakePhotoButton}" Clicked="OnTakePicture"/>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

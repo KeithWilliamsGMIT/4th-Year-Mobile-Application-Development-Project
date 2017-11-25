@@ -125,6 +125,15 @@ namespace DigiReceipt.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Take Photo.
+        /// </summary>
+        internal static string txtTakePhotoButton {
+            get {
+                return ResourceManager.GetString("txtTakePhotoButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to View Receipt.
         /// </summary>
         internal static string txtViewReceiptButton {
