@@ -37,11 +37,15 @@
   <ItemGroup>
     <Compile Include="AuthenticationManager.cs" />
     <Compile Include="IAuthenticate.cs" />
+    <Compile Include="Data\Receipt.cs" />
+    <Compile Include="Models\ReceiptModel.cs" />
     <Compile Include="Resx\AppResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ReceiptViewModel.cs" />
+    <Compile Include="ViewModels\NotificationBase.cs" />
     <Compile Include="Views\AddReceipt.xaml.cs">
       <DependentUpon>AddReceipt.xaml</DependentUpon>
     </Compile>
@@ -161,6 +165,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.4.0.38779\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.4.0.38779\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

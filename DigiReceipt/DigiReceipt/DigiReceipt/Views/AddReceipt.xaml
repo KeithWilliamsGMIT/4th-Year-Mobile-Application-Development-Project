@@ -8,14 +8,14 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="{local:Translate txtBackButton}" Icon="Icons/back.png" Clicked="OnBack"/>
     </ContentPage.ToolbarItems>
-    
+
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
                 <RelativeLayout BackgroundColor="Black" HorizontalOptions="CenterAndExpand" VerticalOptions="Start">
-                    <Image x:Name="imgReceiptPhoto" HorizontalOptions="Center" HeightRequest="250"/>
+                    <Image Source="{Binding Image, Mode=OneWay}" HorizontalOptions="Center" HeightRequest="250"/>
                 </RelativeLayout>
-                <Button Text="{local:Translate txtTakePhotoButton}" Clicked="OnTakePicture"/>
+                <Button Text="{local:Translate txtTakePhotoButton}" Command="{Binding TakePhotoCommand}"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
