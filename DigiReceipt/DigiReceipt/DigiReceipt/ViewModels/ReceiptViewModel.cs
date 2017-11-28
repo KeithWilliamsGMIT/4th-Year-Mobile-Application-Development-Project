@@ -1,4 +1,5 @@
 ﻿using DigiReceipt.Data;
+using DigiReceipt.Models;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using System;
@@ -12,27 +13,29 @@ using Xamarin.Forms;
 
 namespace DigiReceipt.ViewModels
 {
-    public class ReceiptViewModel : NotificationBase<Receipt>
+    public class ReceiptViewModel : NotificationBase<ReceiptModel>
     {
         public ICommand TakePhotoCommand { get; private set; }
+        public ICommand SaveReceiptCommand { get; private set; }
 
-        public ReceiptViewModel(Receipt receipt = null) : base(receipt) {
+        public ReceiptViewModel(ReceiptModel receipt = null) : base(receipt) {
             IssuedOn = DateTime.Now;
 
             // Setup commands.
             TakePhotoCommand = new Command(async () => await OnTakePhoto());
+            SaveReceiptCommand = new Command(() => OnSaveReceipt());
         }
 
         public DateTime IssuedOn
         {
-            get { return This.IssuedOn; }
-            set { SetProperty(This.IssuedOn, value, () => This.IssuedOn = value); }
+            get { return This.Receipt.IssuedOn; }
+            set { SetProperty(This.Receipt.IssuedOn, value, () => This.Receipt.IssuedOn = value); }
         }
 
         public ImageSource Image
         {
-            get { return This.Image; }
-            set { SetProperty(This.Image, value, () => This.Image = value); }
+            get { return This.Receipt.Image; }
+            set { SetProperty(This.Receipt.Image, value, () => This.Receipt.Image = value); }
         }
 
         /// <summary>
@@ -59,6 +62,11 @@ namespace DigiReceipt.ViewModels
             {
                 Image = ImageSource.FromStream(() => file.GetStream());
             }
+        }
+
+        private void OnSaveReceipt()
+        {
+            This.Save();
         }
     }
 }

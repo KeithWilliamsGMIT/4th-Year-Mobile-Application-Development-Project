@@ -16,6 +16,7 @@
                     <Image Source="{Binding Image, Mode=OneWay}" HorizontalOptions="Center" HeightRequest="250"/>
                 </RelativeLayout>
                 <Button Text="{local:Translate txtTakePhotoButton}" Command="{Binding TakePhotoCommand}"/>
+                <Button Text="{local:Translate txtSaveReceiptButton}" Command="{Binding SaveReceiptCommand}"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
