@@ -10,7 +10,6 @@ namespace DigiReceipt.Data
 {
     public class Service
     {
-
         private const string URL_BASE = "https://digireceipt.azurewebsites.net/api";
         private const string URL_RECEIPT = URL_BASE + "/{0}/receipt";
 
@@ -24,12 +23,12 @@ namespace DigiReceipt.Data
             HttpClient client = new HttpClient();
 
             // Get the current users id to determine who the receipt belongs to.
-            string id = AuthenticationManager.DefaultAuthenticationManager.CurrentUser.UserId;
+            string id = AuthenticationManager.DefaultAuthenticationManager.CurrentUser.UserId.Split(':')[1];
             
             // This dictionary will be converted to JSON and will be sent in the request body.
             var body = new Dictionary<string, string> {
                             { "issuedOn", receipt.IssuedOn.ToString() },
-                            { "image", "" }
+                            { "image", receipt.ImageAsBase64() }
                         };
             
             HttpContent content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json");

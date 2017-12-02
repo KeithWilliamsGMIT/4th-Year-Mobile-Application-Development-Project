@@ -3,6 +3,7 @@
 # Description:	Define the API for the web service.
 
 from flask import Flask, request
+from json import dumps
 import os
 
 from .database import retrieve_receipt, create_receipt
@@ -27,4 +28,9 @@ def get_receipt(user, receipt):
 # POST - Add the given receipt to the users list of receipts.
 @app.route('/api/<user>/receipt', methods=['POST'])
 def post_receipt(user):
+	data = request.get_json()
+	data['userId'] = user
+	
+	create_receipt(data)
+	
 	return '[POST] receipt for ' + user

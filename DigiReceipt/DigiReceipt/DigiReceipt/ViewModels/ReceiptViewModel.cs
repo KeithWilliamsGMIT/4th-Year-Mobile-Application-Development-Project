@@ -5,6 +5,7 @@ using Plugin.Media.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,14 +29,21 @@ namespace DigiReceipt.ViewModels
 
         public DateTime IssuedOn
         {
-            get { return This.Receipt.IssuedOn; }
-            set { SetProperty(This.Receipt.IssuedOn, value, () => This.Receipt.IssuedOn = value); }
+            get { return new DateTime(This.Receipt.IssuedOn); }
+            set {
+                long issuedOn = value.Ticks;
+                SetProperty(This.Receipt.IssuedOn, issuedOn, () => This.Receipt.IssuedOn = issuedOn);
+            }
         }
 
         public ImageSource Image
         {
-            get { return This.Receipt.Image; }
-            set { SetProperty(This.Receipt.Image, value, () => This.Receipt.Image = value); }
+            get {
+                if (This.Receipt.Image != null)
+                    return ImageSource.FromStream(() => new MemoryStream(This.Receipt.Image));
+
+                return null;
+            }
         }
 
         /// <summary>
@@ -60,10 +68,17 @@ namespace DigiReceipt.ViewModels
 
             if (file != null)
             {
-                Image = ImageSource.FromStream(() => file.GetStream());
+                var stream = file.GetStream();
+                var bytes = new byte[stream.Length];
+                await stream.ReadAsync(bytes, 0, (int)stream.Length);
+                This.Receipt.Image = bytes;
+                RaisePropertyChanged(nameof(Image));
             }
         }
 
+        /// <summary>
+        /// Save the new receipt.
+        /// </summary>
         private void OnSaveReceipt()
         {
             This.Save();
