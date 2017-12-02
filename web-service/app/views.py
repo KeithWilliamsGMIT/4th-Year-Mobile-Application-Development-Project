@@ -6,31 +6,27 @@ from flask import Flask, request
 from json import dumps
 import os
 
-from .database import retrieve_receipt, create_receipt
+from .database import retrieve_user_receipts, create_receipt
 
 app = Flask(__name__)
 
 # GET - Return all the users receipts.
 @app.route('/api/<user>/receipts', methods=['GET'])
 def get_receipts(user):
-	return '[GET] receipts for ' + user
-
-# GET - Return a requested receipt if it exists.
-@app.route('/api/<user>/receipt/<receipt>', methods=['GET'])
-def get_receipt(user, receipt):
-	message = retrieve_receipt(receipt)
+	response = {'status': 'success', 'message': 'Successfully retrieved receipts for user - ' + user, 'receipts': None}
 	
-	if message is None:
-		message = 'No receipt with id ' + receipt + ' found!'
+	response['receipts'] = retrieve_user_receipts(user)
 	
-	return '[GET] receipt for ' + user + ' - ' + message
+	return dumps(response)
 
 # POST - Add the given receipt to the users list of receipts.
 @app.route('/api/<user>/receipt', methods=['POST'])
 def post_receipt(user):
+	response = {'status': 'success', 'message': 'Successfully added receipt for user - ' + user}
+	
 	data = request.get_json()
 	data['userId'] = user
 	
 	create_receipt(data)
 	
-	return '[POST] receipt for ' + user
+	return dumps(response)
