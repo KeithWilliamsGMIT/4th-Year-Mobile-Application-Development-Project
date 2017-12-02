@@ -11,8 +11,27 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <StackLayout>
-            <Button Text="{local:Translate txtViewReceiptButton}" Clicked="OnViewReceipt"/>
-        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <ScrollView Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <ListView ItemsSource="{Binding Receipts, Mode=OneWay}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <Label Text="{Binding IssuedOn, StringFormat='{0:dd MMMM, yyyy}'}"/>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollView>
+
+            <Button Text="{local:Translate txtViewReceiptButton}" Grid.Row="1" Clicked="OnViewReceipt"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

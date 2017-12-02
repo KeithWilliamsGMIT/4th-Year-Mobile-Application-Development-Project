@@ -25,7 +25,7 @@ def post_receipt(user):
 	response = {'status': 'success', 'message': 'Successfully added receipt for user - ' + user}
 	
 	data = request.get_json()
-	data['userId'] = user
+	data['user_id'] = user
 	
 	create_receipt(data)
 	

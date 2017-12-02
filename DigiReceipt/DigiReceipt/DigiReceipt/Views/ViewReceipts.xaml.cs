@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DigiReceipt.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace DigiReceipt
         public ViewReceipts()
         {
             InitializeComponent();
+            BindingContext = new ReceiptsViewModel();
         }
 
         /// <summary>

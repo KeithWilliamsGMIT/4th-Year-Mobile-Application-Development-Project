@@ -20,6 +20,14 @@ namespace DigiReceipt.Models
         }
 
         /// <summary>
+        /// Fully parameterised constructor for ReceiptModel class.
+        /// </summary>
+        public ReceiptModel(Receipt receipt)
+        {
+            Receipt = receipt;
+        }
+
+        /// <summary>
         /// Finalise receipt and save to the web service.
         /// </summary>
         public async void Save()
