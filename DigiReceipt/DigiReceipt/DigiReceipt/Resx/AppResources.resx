@@ -141,6 +141,9 @@
   <data name="txtSaveReceiptButton" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="txtSelectPhotoButton" xml:space="preserve">
+    <value>Select Photo</value>
+  </data>
   <data name="txtTakePhotoButton" xml:space="preserve">
     <value>Take Photo</value>
   </data>

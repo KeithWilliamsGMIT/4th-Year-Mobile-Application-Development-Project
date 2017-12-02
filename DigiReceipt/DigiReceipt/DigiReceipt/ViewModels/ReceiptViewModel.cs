@@ -17,6 +17,7 @@ namespace DigiReceipt.ViewModels
     public class ReceiptViewModel : NotificationBase<ReceiptModel>
     {
         public ICommand TakePhotoCommand { get; private set; }
+        public ICommand SelectPhotoCommand { get; private set; }
         public ICommand SaveReceiptCommand { get; private set; }
 
         public ReceiptViewModel(ReceiptModel receipt = null) : base(receipt) {
@@ -24,6 +25,7 @@ namespace DigiReceipt.ViewModels
 
             // Setup commands.
             TakePhotoCommand = new Command(async () => await OnTakePhoto());
+            SelectPhotoCommand = new Command(async () => await OnSelectPhoto());
             SaveReceiptCommand = new Command(() => OnSaveReceipt());
         }
 
@@ -66,6 +68,35 @@ namespace DigiReceipt.ViewModels
                 Name = DateTime.Now.ToString("yyyyMMddHHmmssfff")
             });
 
+            await UpdatePhoto(file);
+        }
+
+        /// <summary>
+        /// Select a picture from the users device and display it to the user. 
+        /// </summary>
+        /// <returns></returns>
+        private async Task OnSelectPhoto()
+        {
+            // Create instance on singleton class.
+            await CrossMedia.Current.Initialize();
+
+            if (!CrossMedia.Current.IsPickPhotoSupported)
+            {
+                return;
+            }
+
+            var file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions());
+
+            await UpdatePhoto(file);
+        }
+
+        /// <summary>
+        /// Sets the given file as the image of the current receipt and update bindings.
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        private async Task UpdatePhoto(MediaFile file)
+        {
             if (file != null)
             {
                 var stream = file.GetStream();
