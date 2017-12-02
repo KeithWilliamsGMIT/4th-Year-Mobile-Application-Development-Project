@@ -48,6 +48,17 @@ namespace DigiReceipt.ViewModels
             }
         }
 
+        public string Price
+        {
+            get { return This.Receipt.Price.ToString("0.##"); }
+            set {
+                float price;
+
+                if (float.TryParse(value, out price))
+                    SetProperty(This.Receipt.Price, price, () => This.Receipt.Price = price);
+            }
+        }
+
         /// <summary>
         /// Take a picture and display it to the user.
         /// </summary>

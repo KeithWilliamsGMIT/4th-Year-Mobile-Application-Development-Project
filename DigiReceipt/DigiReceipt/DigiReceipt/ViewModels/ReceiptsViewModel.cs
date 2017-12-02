@@ -32,15 +32,6 @@ namespace DigiReceipt.ViewModels
             get { return receipts; }
             set { SetProperty(ref receipts, value); }
         }
-        
-        public ReceiptViewModel SelectedItem
-        {
-            get { return selectedItem; }
-            set {
-                selectedItem = value;
-                RaisePropertyChanged(nameof(SelectedItem));
-            }
-        }
 
         /// <summary>
         /// Load the next batch of receipts and append them to the list.

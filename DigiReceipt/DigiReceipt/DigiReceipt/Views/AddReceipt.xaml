@@ -29,6 +29,8 @@
                     </DatePicker>
                 </StackLayout>
 
+                <Entry Text="{Binding Price, Mode=TwoWay}"/>
+
                 <!-- Save the new receipt -->
                 <Button Text="{local:Translate txtSaveReceiptButton}" Command="{Binding SaveReceiptCommand}"/>
             </StackLayout>

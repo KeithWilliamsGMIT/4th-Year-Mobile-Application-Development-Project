@@ -27,9 +27,10 @@ namespace DigiReceipt.Data
             string id = AuthenticationManager.DefaultAuthenticationManager.CurrentUser.UserId.Split(':')[1];
             
             // This dictionary will be converted to JSON and will be sent in the request body.
-            var body = new Dictionary<string, string> {
+            var body = new Dictionary<string, Object> {
                             { "issuedOn", receipt.IssuedOn.ToString() },
-                            { "image", receipt.ImageAsBase64() }
+                            { "image", receipt.ImageAsBase64() },
+                            { "price", receipt.Price }
                         };
             
             HttpContent content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json");

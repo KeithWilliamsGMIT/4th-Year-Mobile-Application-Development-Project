@@ -15,6 +15,9 @@ namespace DigiReceipt.Data
         // The image of the receipt as a byte array.
         public byte[] Image { get; set; }
 
+        // The price on the receipt.
+        public float Price { get; set; }
+
         public Receipt()
         {
             IssuedOn = DateTime.Now.Ticks;
@@ -26,7 +29,12 @@ namespace DigiReceipt.Data
         /// <returns></returns>
         public string ImageAsBase64()
         {
-            return Convert.ToBase64String(Image);
+            if (Image != null) {
+                return Convert.ToBase64String(Image);
+            } else
+            {
+                return String.Empty;
+            }
         }
     }
 }
