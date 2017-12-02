@@ -3,13 +3,14 @@
 # Description:	Define the API for the web service.
 
 from flask import Flask, request
+from json import dumps
 import os
 
-from database import retrieve_receipt, create_receipt
+from .database import retrieve_receipt, create_receipt
 
 app = Flask(__name__)
 
-# POST - Return all the users receipts.
+# GET - Return all the users receipts.
 @app.route('/api/<user>/receipts', methods=['GET'])
 def get_receipts(user):
 	return '[GET] receipts for ' + user
@@ -27,14 +28,9 @@ def get_receipt(user, receipt):
 # POST - Add the given receipt to the users list of receipts.
 @app.route('/api/<user>/receipt', methods=['POST'])
 def post_receipt(user):
+	data = request.get_json()
+	data['userId'] = user
+	
+	create_receipt(data)
+	
 	return '[POST] receipt for ' + user
-
-# Only run if this is the main module.
-if __name__ == '__main__':
-	app.debug = True
-	
-	# The secret key is used to generate access tokens
-	app.secret_key = os.urandom(24)
-	
-	# Set the host to 0.0.0.0 to make it accessible when deployed
-	app.run(host="0.0.0.0", threaded=True)

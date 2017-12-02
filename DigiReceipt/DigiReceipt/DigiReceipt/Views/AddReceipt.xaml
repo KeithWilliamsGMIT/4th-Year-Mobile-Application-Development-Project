@@ -8,10 +8,30 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="{local:Translate txtBackButton}" Icon="Icons/back.png" Clicked="OnBack"/>
     </ContentPage.ToolbarItems>
-    
+
     <ContentPage.Content>
-        <StackLayout>
-            
-        </StackLayout>
+        <ScrollView>
+            <StackLayout>
+                <Image Source="{Binding Image, Mode=OneWay}" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="Start"/>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <!-- Take a picture with the camera -->
+                    <Button Text="{local:Translate txtTakePhotoButton}" Command="{Binding TakePhotoCommand}" HorizontalOptions="FillAndExpand"/>
+
+                    <!-- Select a picture from the users device -->
+                    <Button Text="{local:Translate txtSelectPhotoButton}" Command="{Binding SelectPhotoCommand}" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
+                <!-- Choose the date which the receipt was issued on -->
+                <StackLayout>
+                    <DatePicker VerticalOptions="CenterAndExpand" Date="{Binding IssuedOn, Mode=TwoWay}">
+                        <DatePicker.Format>dd-MM-yyyy</DatePicker.Format>
+                    </DatePicker>
+                </StackLayout>
+
+                <!-- Save the new receipt -->
+                <Button Text="{local:Translate txtSaveReceiptButton}" Command="{Binding SaveReceiptCommand}"/>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

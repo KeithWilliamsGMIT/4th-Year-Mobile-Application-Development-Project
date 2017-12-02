@@ -138,6 +138,15 @@
   <data name="txtLogoutButton" xml:space="preserve">
     <value>Logout</value>
   </data>
+  <data name="txtSaveReceiptButton" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="txtSelectPhotoButton" xml:space="preserve">
+    <value>Select Photo</value>
+  </data>
+  <data name="txtTakePhotoButton" xml:space="preserve">
+    <value>Take Photo</value>
+  </data>
   <data name="txtViewReceiptButton" xml:space="preserve">
     <value>View Receipt</value>
   </data>

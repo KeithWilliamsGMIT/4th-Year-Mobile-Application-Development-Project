@@ -125,6 +125,33 @@ namespace DigiReceipt.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        internal static string txtSaveReceiptButton {
+            get {
+                return ResourceManager.GetString("txtSaveReceiptButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Photo.
+        /// </summary>
+        internal static string txtSelectPhotoButton {
+            get {
+                return ResourceManager.GetString("txtSelectPhotoButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Take Photo.
+        /// </summary>
+        internal static string txtTakePhotoButton {
+            get {
+                return ResourceManager.GetString("txtTakePhotoButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to View Receipt.
         /// </summary>
         internal static string txtViewReceiptButton {

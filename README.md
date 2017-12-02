@@ -58,8 +58,7 @@ pip3 install -r requirements.txt
 Before starting the web service you will also need to download the Tesseract OCR library on which it depends. The [instructions](https://github.com/tesseract-ocr/tesseract/wiki) are available on the project wiki on GitHub. A local instance of MongoDB must also be running. Instructions for installing MongoDB can be found on the online [manual](https://docs.mongodb.com/manual/installation/). Finally, use the below commands to start the web service.
 
 ```
-cd app
-python3 app.py
+python3 main.py
 ```
 
-The web service should now be running on [http://0.0.0.0:5000](http://0.0.0.0:5000).
+The web service should now be running on [http://localhost:5000](http://localhost:5000).
