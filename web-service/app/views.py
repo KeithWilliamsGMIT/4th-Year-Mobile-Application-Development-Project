@@ -10,12 +10,12 @@ from .database import retrieve_user_receipts, create_receipt
 
 app = Flask(__name__)
 
-# GET - Return all the users receipts.
-@app.route('/api/<user>/receipts', methods=['GET'])
-def get_receipts(user):
+# GET - Return users receipts created after a given timestamp.
+@app.route('/api/<user>/receipts/<issued_on>', methods=['GET'])
+def get_receipts(user, issued_on):
 	response = {'status': 'success', 'message': 'Successfully retrieved receipts for user - ' + user, 'receipts': None}
 	
-	response['receipts'] = retrieve_user_receipts(user)
+	response['receipts'] = retrieve_user_receipts(user, issued_on)
 	
 	return dumps(response)
 

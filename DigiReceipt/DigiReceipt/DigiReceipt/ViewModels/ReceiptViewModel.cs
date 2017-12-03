@@ -21,8 +21,6 @@ namespace DigiReceipt.ViewModels
         public ICommand SaveReceiptCommand { get; private set; }
 
         public ReceiptViewModel(ReceiptModel receipt = null) : base(receipt) {
-            IssuedOn = DateTime.Now;
-
             // Setup commands.
             TakePhotoCommand = new Command(async () => await OnTakePhoto());
             SelectPhotoCommand = new Command(async () => await OnSelectPhoto());
@@ -33,6 +31,9 @@ namespace DigiReceipt.ViewModels
         {
             get { return new DateTime(This.Receipt.IssuedOn); }
             set {
+                TimeSpan ts = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+                value = value.Date + ts;
+
                 long issuedOn = value.Ticks;
                 SetProperty(This.Receipt.IssuedOn, issuedOn, () => This.Receipt.IssuedOn = issuedOn);
             }
@@ -50,7 +51,7 @@ namespace DigiReceipt.ViewModels
 
         public string Price
         {
-            get { return This.Receipt.Price.ToString("0.##"); }
+            get { return This.Receipt.Price.ToString(); }
             set {
                 float price;
 
@@ -124,6 +125,7 @@ namespace DigiReceipt.ViewModels
         private void OnSaveReceipt()
         {
             This.Save();
+            This = new ReceiptModel();
         }
     }
 }

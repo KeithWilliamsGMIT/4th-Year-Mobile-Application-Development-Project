@@ -12,7 +12,7 @@ namespace DigiReceipt.Data
     {
         private const string URL_BASE = "https://digireceipt.azurewebsites.net/api";
         private const string URL_RECEIPT = URL_BASE + "/{0}/receipt";
-        private const string URL_RECEIPTS = URL_BASE + "/{0}/receipts";
+        private const string URL_RECEIPTS = URL_BASE + "/{0}/receipts/{1}";
 
         /// <summary>
         /// Send the given receipt to the web service to be saved.
@@ -30,7 +30,8 @@ namespace DigiReceipt.Data
             var body = new Dictionary<string, Object> {
                             { "issuedOn", receipt.IssuedOn.ToString() },
                             { "image", receipt.ImageAsBase64() },
-                            { "price", receipt.Price }
+                            { "price", receipt.Price },
+                            { "timestamp", receipt.Timestamp }
                         };
             
             HttpContent content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json");
@@ -49,10 +50,10 @@ namespace DigiReceipt.Data
         }
 
         /// <summary>
-        /// Retrieve a collection of receipts from the web service.
+        /// Retrieve a collection of receipts issued after the given date from the web service.
         /// </summary>
         /// <returns></returns>
-        public static async Task<List<Receipt>> Retrieve()
+        public static async Task<List<Receipt>> Retrieve(long lastTimestamp)
         {
             HttpClient client = new HttpClient();
 
@@ -60,9 +61,9 @@ namespace DigiReceipt.Data
             string id = AuthenticationManager.DefaultAuthenticationManager.CurrentUser.UserId.Split(':')[1];
             
             // Get the data and wait for a response from the server.
-            var response = await client.GetAsync(String.Format(URL_RECEIPTS, id));
+            var response = await client.GetAsync(String.Format(URL_RECEIPTS, id, lastTimestamp));
 
-            dynamic data = null;
+            List<Receipt> data = null;
 
             if (response != null)
             {

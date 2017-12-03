@@ -17,14 +17,25 @@ namespace DigiReceipt.ViewModels
 {
     public class ReceiptsViewModel : NotificationBase<ReceiptsModel>
     {
+        public ICommand LoadNextReceiptsCommand { get; private set; }
+
         // Collection of receipts to display to the user.
         private ObservableCollection<ReceiptViewModel> receipts = new ObservableCollection<ReceiptViewModel>();
 
-        // Selected receipt from the collection.
-        private ReceiptViewModel selectedItem;
+        // Query for receipts issued after this datetime.
+        private DateTime issuedAfter = DateTime.Now;
+
+        // Determine visablility of loading message.
+        private bool isLoading = false;
+
+        // Determine if there are more receipts to load.
+        private bool isFinishedLoading = false;
 
         public ReceiptsViewModel(ReceiptsModel receipts = null) : base(receipts) {
-            LoadNextReceipts();
+            OnLoadNextReceipts();
+
+            // Setup commands.
+            LoadNextReceiptsCommand = new Command(async () => await OnLoadNextReceipts());
         }
         
         public ObservableCollection<ReceiptViewModel> Receipts
@@ -33,19 +44,65 @@ namespace DigiReceipt.ViewModels
             set { SetProperty(ref receipts, value); }
         }
 
+        public DateTime IssuedAfter
+        {
+            get { return issuedAfter; }
+            set
+            {
+                if (!IssuedAfter.Date.Equals(value.Date)) {
+                    issuedAfter = value;
+                    RaisePropertyChanged(nameof(IssuedAfter));
+
+                    Receipts.Clear();
+                    RaisePropertyChanged(nameof(Receipts));
+
+                    isFinishedLoading = false;
+                    OnLoadNextReceipts();
+                }
+            }
+        }
+
+        public bool IsLoading
+        {
+            get { return isLoading; }
+            set
+            {
+                isLoading = value;
+                RaisePropertyChanged(nameof(IsLoading));
+            }
+        }
+
         /// <summary>
         /// Load the next batch of receipts and append them to the list.
         /// </summary>
         /// <returns></returns>
-        private async Task LoadNextReceipts()
+        private async Task OnLoadNextReceipts()
         {
-            await This.Retrieve();
+            if (!IsLoading && !isFinishedLoading) {
+                IsLoading = true;
 
-            foreach (var receipt in This.Receipts)
-            {
-                ReceiptModel model = new ReceiptModel(receipt);
-                ReceiptViewModel viewModel = new ReceiptViewModel(model);
-                Receipts.Add(viewModel);
+                long lastTimestamp = IssuedAfter.AddDays(1).Ticks;
+
+                if (Receipts.Count > 0)
+                {
+                    lastTimestamp = Receipts[Receipts.Count - 1].IssuedOn.Ticks;
+                }
+
+                List<Receipt> newReceipts = await This.Retrieve(lastTimestamp);
+
+                foreach (var receipt in newReceipts)
+                {
+                    ReceiptModel model = new ReceiptModel(receipt);
+                    ReceiptViewModel viewModel = new ReceiptViewModel(model);
+                    Receipts.Add(viewModel);
+                }
+
+                if (newReceipts.Count < 5)
+                {
+                    isFinishedLoading = true;
+                }
+
+                IsLoading = false;
             }
         }
     }

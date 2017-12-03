@@ -27,8 +27,8 @@ receipt_collection = mongodb['receipt-collection']
 	
 # Return all receipt document belonging to the given user.
 # If no receipt matching the query is found return None.
-def retrieve_user_receipts(user_id):
-	receipts = receipt_collection.find({'user_id': user_id}, {'_id': False})
+def retrieve_user_receipts(user_id, issued_on):
+	receipts = receipt_collection.find({'$and': [ {'user_id': user_id}, {'issuedOn': {'$lt': issued_on}} ] }, {'_id': False}).sort('issuedOn', -1).limit(5)
 	
 	return dumps(receipts)
 

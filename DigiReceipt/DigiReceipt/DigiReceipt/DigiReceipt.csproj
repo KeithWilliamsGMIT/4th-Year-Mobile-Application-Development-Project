@@ -36,6 +36,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AuthenticationManager.cs" />
+    <Compile Include="Behaviours\ListViewPagningBehavior.cs" />
+    <Compile Include="Converters\ItemVisibilityEventArgsConverter.cs" />
     <Compile Include="Data\Service.cs" />
     <Compile Include="IAuthenticate.cs" />
     <Compile Include="Data\Receipt.cs" />

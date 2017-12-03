@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:DigiReceipt"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              x:Class="DigiReceipt.AddReceipt"
              Style="{StaticResource PageStyle}"
              Title="{local:Translate txtAddReceiptPageTitle}">
@@ -24,7 +25,7 @@
 
                 <!-- Choose the date which the receipt was issued on -->
                 <StackLayout>
-                    <DatePicker VerticalOptions="CenterAndExpand" Date="{Binding IssuedOn, Mode=TwoWay}">
+                    <DatePicker VerticalOptions="CenterAndExpand" Date="{Binding IssuedOn, Mode=TwoWay}" MaximumDate="{x:Static sys:DateTime.Now}">
                         <DatePicker.Format>dd-MM-yyyy</DatePicker.Format>
                     </DatePicker>
                 </StackLayout>

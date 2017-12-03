@@ -129,6 +129,9 @@
   <data name="txtIssuedOnLabel" xml:space="preserve">
     <value>Issued on</value>
   </data>
+  <data name="txtLoadingLabel" xml:space="preserve">
+    <value>LOADING...</value>
+  </data>
   <data name="txtLoginPageTitle" xml:space="preserve">
     <value>DigiReceipt</value>
   </data>

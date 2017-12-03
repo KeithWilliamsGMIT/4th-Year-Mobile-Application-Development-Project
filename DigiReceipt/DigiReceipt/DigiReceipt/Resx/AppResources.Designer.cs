@@ -98,6 +98,15 @@ namespace DigiReceipt.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to LOADING....
+        /// </summary>
+        internal static string txtLoadingLabel {
+            get {
+                return ResourceManager.GetString("txtLoadingLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DigiReceipt.
         /// </summary>
         internal static string txtLoginPageTitle {

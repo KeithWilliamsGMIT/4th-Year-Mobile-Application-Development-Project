@@ -18,9 +18,13 @@ namespace DigiReceipt.Data
         // The price on the receipt.
         public float Price { get; set; }
 
+        // The date the receipt was created on.
+        public long Timestamp { get; set; }
+
         public Receipt()
         {
             IssuedOn = DateTime.Now.Ticks;
+            Timestamp = DateTime.Now.Ticks;
         }
 
         /// <summary>
