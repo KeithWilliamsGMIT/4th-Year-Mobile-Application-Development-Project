@@ -11,8 +11,29 @@
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
-        <StackLayout>
-            
-        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <BoxView Color="Black"/>
+            <Label Text="{local:Translate txtNoImageLabel}" TextColor="White" IsVisible="{Binding HasNoImage}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            <Image Source="{Binding Image, Mode=OneWay}" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+
+            <StackLayout Grid.Row="1">
+                <Label Text="{local:Translate txtDetailsLabel}" FontSize="Large"/>
+                
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{local:Translate txtPriceLabel}"/>
+                    <Label Text="{Binding Price, StringFormat='{0:C}'}"/>
+                </StackLayout>
+                
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{local:Translate txtIssuedOnLabel}"/>
+                    <Label Text="{Binding IssuedOn, StringFormat='{0:dd MMMM, yyyy}'}"/>
+                </StackLayout>
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

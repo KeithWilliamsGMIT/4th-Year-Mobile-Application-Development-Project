@@ -24,7 +24,7 @@ namespace DigiReceipt.ViewModels
             // Setup commands.
             TakePhotoCommand = new Command(async () => await OnTakePhoto());
             SelectPhotoCommand = new Command(async () => await OnSelectPhoto());
-            SaveReceiptCommand = new Command(() => OnSaveReceipt());
+            SaveReceiptCommand = new Command(async () => await OnSaveReceipt());
         }
 
         public DateTime IssuedOn
@@ -49,14 +49,16 @@ namespace DigiReceipt.ViewModels
             }
         }
 
-        public string Price
+        public bool HasNoImage
         {
-            get { return This.Receipt.Price.ToString(); }
-            set {
-                float price;
+            get { return This.Receipt.Image == null || This.Receipt.Image.Length == 0; }
+        }
 
-                if (float.TryParse(value, out price))
-                    SetProperty(This.Receipt.Price, price, () => This.Receipt.Price = price);
+        public float Price
+        {
+            get { return This.Receipt.Price; }
+            set {
+                SetProperty(This.Receipt.Price, value, () => This.Receipt.Price = value);
             }
         }
 
@@ -116,16 +118,21 @@ namespace DigiReceipt.ViewModels
                 await stream.ReadAsync(bytes, 0, (int)stream.Length);
                 This.Receipt.Image = bytes;
                 RaisePropertyChanged(nameof(Image));
+                RaisePropertyChanged(nameof(HasNoImage));
             }
         }
 
         /// <summary>
         /// Save the new receipt.
         /// </summary>
-        private void OnSaveReceipt()
+        private async Task OnSaveReceipt()
         {
-            This.Save();
+            await This.Save();
             This = new ReceiptModel();
+            RaisePropertyChanged(nameof(IssuedOn));
+            RaisePropertyChanged(nameof(Image));
+            RaisePropertyChanged(nameof(HasNoImage));
+            RaisePropertyChanged(nameof(Price));
         }
     }
 }

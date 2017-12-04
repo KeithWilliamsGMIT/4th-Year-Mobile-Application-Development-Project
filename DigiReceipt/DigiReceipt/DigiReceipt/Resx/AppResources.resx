@@ -126,6 +126,9 @@
   <data name="txtBackButton" xml:space="preserve">
     <value>Back</value>
   </data>
+  <data name="txtDetailsLabel" xml:space="preserve">
+    <value>Details</value>
+  </data>
   <data name="txtIssuedOnLabel" xml:space="preserve">
     <value>Issued on</value>
   </data>
@@ -143,6 +146,9 @@
   </data>
   <data name="txtLogoutButton" xml:space="preserve">
     <value>Logout</value>
+  </data>
+  <data name="txtNoImageLabel" xml:space="preserve">
+    <value>No Image Available!</value>
   </data>
   <data name="txtPriceLabel" xml:space="preserve">
     <value>Price</value>

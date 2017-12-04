@@ -34,37 +34,41 @@
             </StackLayout>
 
             <StackLayout Grid.Row="1">
-                <ScrollView Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                    <ListView ItemsSource="{Binding Receipts, Mode=OneWay}" ItemTapped="OnListViewItemTapped">
-                        <ListView.Behaviors>
-                            <behaviours:ListViewPagningBehavior
+                <Label Text="{local:Translate txtLoadingLabel}" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsLoading}" FontSize="Medium" FontAttributes="Bold"/>
+
+                <ListView Grid.Row="1" ItemsSource="{Binding Receipts, Mode=OneWay}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" ItemTapped="OnListViewItemTapped">
+                    <ListView.Behaviors>
+                        <behaviours:ListViewPagningBehavior
 					            Command="{Binding LoadNextReceiptsCommand}"
 					            Converter="{StaticResource ItemVisibilityConverter}">
-                            </behaviours:ListViewPagningBehavior>
-                        </ListView.Behaviors>
+                        </behaviours:ListViewPagningBehavior>
+                    </ListView.Behaviors>
 
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <ViewCell.View>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <StackLayout Orientation="Horizontal">
+                                        <!-- Display image of receipt -->
+                                        <Image Source="{Binding Image}" HeightRequest="50" WidthRequest="50" Aspect="AspectFit" BackgroundColor="Black" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+                                        <!-- Display details of receipt -->
                                         <StackLayout Orientation="Vertical">
                                             <StackLayout Orientation="Horizontal">
                                                 <Label Text="{local:Translate txtPriceLabel}"/>
-                                                <Label Text="{Binding Price}"/>
+                                                <Label Text="{Binding Price, StringFormat='{0:C}'}"/>
                                             </StackLayout>
                                             <StackLayout Orientation="Horizontal">
                                                 <Label Text="{local:Translate txtIssuedOnLabel}"/>
                                                 <Label Text="{Binding IssuedOn, StringFormat='{0:dd MMMM, yyyy}'}"/>
                                             </StackLayout>
                                         </StackLayout>
-                                    </ViewCell.View>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </ScrollView>
-
-                <Label Text="{local:Translate txtLoadingLabel}" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsLoading}"/>
+                                    </StackLayout>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

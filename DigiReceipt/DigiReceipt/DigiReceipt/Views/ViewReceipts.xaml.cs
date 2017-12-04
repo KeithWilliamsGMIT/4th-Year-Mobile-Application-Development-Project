@@ -50,7 +50,10 @@ namespace DigiReceipt
         private async void OnListViewItemTapped(object sender, ItemTappedEventArgs e)
         {
             var item = e.Item as ReceiptViewModel;
-            await Navigation.PushAsync(new ViewReceipt(item));
+
+            if (item != null) {
+                await Navigation.PushAsync(new ViewReceipt(item));
+            }
         }
     }
 }

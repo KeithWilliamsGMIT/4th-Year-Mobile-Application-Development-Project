@@ -11,10 +11,17 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout>
-                <Image Source="{Binding Image, Mode=OneWay}" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="Start"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <BoxView Color="Black"/>
+            <Label Text="{local:Translate txtNoImageLabel}" TextColor="White" IsVisible="{Binding HasNoImage}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            <Image Source="{Binding Image, Mode=OneWay}" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
 
+            <StackLayout Grid.Row="1">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                     <!-- Take a picture with the camera -->
                     <Button Text="{local:Translate txtTakePhotoButton}" Command="{Binding TakePhotoCommand}" HorizontalOptions="FillAndExpand"/>
@@ -24,17 +31,21 @@
                 </StackLayout>
 
                 <!-- Choose the date which the receipt was issued on -->
+                <Label Text="{local:Translate txtIssuedOnLabel}"/>
+
                 <StackLayout>
                     <DatePicker VerticalOptions="CenterAndExpand" Date="{Binding IssuedOn, Mode=TwoWay}" MaximumDate="{x:Static sys:DateTime.Now}">
                         <DatePicker.Format>dd-MM-yyyy</DatePicker.Format>
                     </DatePicker>
                 </StackLayout>
 
+                <!-- Enter price on receipt -->
+                <Label Text="{local:Translate txtPriceLabel}"/>
                 <Entry Text="{Binding Price, Mode=TwoWay}"/>
 
                 <!-- Save the new receipt -->
                 <Button Text="{local:Translate txtSaveReceiptButton}" Command="{Binding SaveReceiptCommand}"/>
             </StackLayout>
-        </ScrollView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

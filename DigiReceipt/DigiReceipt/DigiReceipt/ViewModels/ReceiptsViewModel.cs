@@ -22,6 +22,9 @@ namespace DigiReceipt.ViewModels
         // Collection of receipts to display to the user.
         private ObservableCollection<ReceiptViewModel> receipts = new ObservableCollection<ReceiptViewModel>();
 
+        // Selected receipt in the list.
+        private ReceiptViewModel selectedItem;
+
         // Query for receipts issued after this datetime.
         private DateTime issuedAfter = DateTime.Now;
 
@@ -32,7 +35,7 @@ namespace DigiReceipt.ViewModels
         private bool isFinishedLoading = false;
 
         public ReceiptsViewModel(ReceiptsModel receipts = null) : base(receipts) {
-            OnLoadNextReceipts();
+            RefreshReceipts();
 
             // Setup commands.
             LoadNextReceiptsCommand = new Command(async () => await OnLoadNextReceipts());
@@ -44,6 +47,21 @@ namespace DigiReceipt.ViewModels
             set { SetProperty(ref receipts, value); }
         }
 
+        public ReceiptViewModel SelectedItem
+        {
+            get
+            {
+                return selectedItem;
+            }
+
+            set
+            {
+                selectedItem = value;
+                RaisePropertyChanged(nameof(SelectedItem));
+
+            }
+        }
+
         public DateTime IssuedAfter
         {
             get { return issuedAfter; }
@@ -53,11 +71,7 @@ namespace DigiReceipt.ViewModels
                     issuedAfter = value;
                     RaisePropertyChanged(nameof(IssuedAfter));
 
-                    Receipts.Clear();
-                    RaisePropertyChanged(nameof(Receipts));
-
-                    isFinishedLoading = false;
-                    OnLoadNextReceipts();
+                    RefreshReceipts();
                 }
             }
         }
@@ -104,6 +118,21 @@ namespace DigiReceipt.ViewModels
 
                 IsLoading = false;
             }
+        }
+
+        /// <summary>
+        /// Refresh the list of receipts.
+        /// </summary>
+        private void RefreshReceipts()
+        {
+            Receipts.Remove(SelectedItem);
+            SelectedItem = null;
+
+            Receipts.Clear();
+            RaisePropertyChanged(nameof(Receipts));
+
+            isFinishedLoading = false;
+            OnLoadNextReceipts();
         }
     }
 }

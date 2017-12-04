@@ -89,6 +89,15 @@ namespace DigiReceipt.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        internal static string txtDetailsLabel {
+            get {
+                return ResourceManager.GetString("txtDetailsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Issued on.
         /// </summary>
         internal static string txtIssuedOnLabel {
@@ -139,6 +148,15 @@ namespace DigiReceipt.Resx {
         internal static string txtLogoutButton {
             get {
                 return ResourceManager.GetString("txtLogoutButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Image Available!.
+        /// </summary>
+        internal static string txtNoImageLabel {
+            get {
+                return ResourceManager.GetString("txtNoImageLabel", resourceCulture);
             }
         }
         
