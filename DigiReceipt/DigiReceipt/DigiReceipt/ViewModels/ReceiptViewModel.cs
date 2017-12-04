@@ -21,18 +21,19 @@ namespace DigiReceipt.ViewModels
         public ICommand SaveReceiptCommand { get; private set; }
 
         public ReceiptViewModel(ReceiptModel receipt = null) : base(receipt) {
-            IssuedOn = DateTime.Now;
-
             // Setup commands.
             TakePhotoCommand = new Command(async () => await OnTakePhoto());
             SelectPhotoCommand = new Command(async () => await OnSelectPhoto());
-            SaveReceiptCommand = new Command(() => OnSaveReceipt());
+            SaveReceiptCommand = new Command(async () => await OnSaveReceipt());
         }
 
         public DateTime IssuedOn
         {
             get { return new DateTime(This.Receipt.IssuedOn); }
             set {
+                TimeSpan ts = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+                value = value.Date + ts;
+
                 long issuedOn = value.Ticks;
                 SetProperty(This.Receipt.IssuedOn, issuedOn, () => This.Receipt.IssuedOn = issuedOn);
             }
@@ -45,6 +46,19 @@ namespace DigiReceipt.ViewModels
                     return ImageSource.FromStream(() => new MemoryStream(This.Receipt.Image));
 
                 return null;
+            }
+        }
+
+        public bool HasNoImage
+        {
+            get { return This.Receipt.Image == null || This.Receipt.Image.Length == 0; }
+        }
+
+        public float Price
+        {
+            get { return This.Receipt.Price; }
+            set {
+                SetProperty(This.Receipt.Price, value, () => This.Receipt.Price = value);
             }
         }
 
@@ -104,15 +118,21 @@ namespace DigiReceipt.ViewModels
                 await stream.ReadAsync(bytes, 0, (int)stream.Length);
                 This.Receipt.Image = bytes;
                 RaisePropertyChanged(nameof(Image));
+                RaisePropertyChanged(nameof(HasNoImage));
             }
         }
 
         /// <summary>
         /// Save the new receipt.
         /// </summary>
-        private void OnSaveReceipt()
+        private async Task OnSaveReceipt()
         {
-            This.Save();
+            await This.Save();
+            This = new ReceiptModel();
+            RaisePropertyChanged(nameof(IssuedOn));
+            RaisePropertyChanged(nameof(Image));
+            RaisePropertyChanged(nameof(HasNoImage));
+            RaisePropertyChanged(nameof(Price));
         }
     }
 }

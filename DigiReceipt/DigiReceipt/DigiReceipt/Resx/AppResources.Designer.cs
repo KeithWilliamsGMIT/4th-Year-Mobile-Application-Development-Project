@@ -89,6 +89,33 @@ namespace DigiReceipt.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        internal static string txtDetailsLabel {
+            get {
+                return ResourceManager.GetString("txtDetailsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issued on.
+        /// </summary>
+        internal static string txtIssuedOnLabel {
+            get {
+                return ResourceManager.GetString("txtIssuedOnLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LOADING....
+        /// </summary>
+        internal static string txtLoadingLabel {
+            get {
+                return ResourceManager.GetString("txtLoadingLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DigiReceipt.
         /// </summary>
         internal static string txtLoginPageTitle {
@@ -125,6 +152,24 @@ namespace DigiReceipt.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No Image Available!.
+        /// </summary>
+        internal static string txtNoImageLabel {
+            get {
+                return ResourceManager.GetString("txtNoImageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price.
+        /// </summary>
+        internal static string txtPriceLabel {
+            get {
+                return ResourceManager.GetString("txtPriceLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         internal static string txtSaveReceiptButton {
@@ -148,15 +193,6 @@ namespace DigiReceipt.Resx {
         internal static string txtTakePhotoButton {
             get {
                 return ResourceManager.GetString("txtTakePhotoButton", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to View Receipt.
-        /// </summary>
-        internal static string txtViewReceiptButton {
-            get {
-                return ResourceManager.GetString("txtViewReceiptButton", resourceCulture);
             }
         }
         

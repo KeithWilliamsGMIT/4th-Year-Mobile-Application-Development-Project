@@ -126,6 +126,15 @@
   <data name="txtBackButton" xml:space="preserve">
     <value>Back</value>
   </data>
+  <data name="txtDetailsLabel" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="txtIssuedOnLabel" xml:space="preserve">
+    <value>Issued on</value>
+  </data>
+  <data name="txtLoadingLabel" xml:space="preserve">
+    <value>LOADING...</value>
+  </data>
   <data name="txtLoginPageTitle" xml:space="preserve">
     <value>DigiReceipt</value>
   </data>
@@ -138,6 +147,12 @@
   <data name="txtLogoutButton" xml:space="preserve">
     <value>Logout</value>
   </data>
+  <data name="txtNoImageLabel" xml:space="preserve">
+    <value>No Image Available!</value>
+  </data>
+  <data name="txtPriceLabel" xml:space="preserve">
+    <value>Price</value>
+  </data>
   <data name="txtSaveReceiptButton" xml:space="preserve">
     <value>Save</value>
   </data>
@@ -146,9 +161,6 @@
   </data>
   <data name="txtTakePhotoButton" xml:space="preserve">
     <value>Take Photo</value>
-  </data>
-  <data name="txtViewReceiptButton" xml:space="preserve">
-    <value>View Receipt</value>
   </data>
   <data name="txtViewReceiptPageTitle" xml:space="preserve">
     <value>Receipt</value>

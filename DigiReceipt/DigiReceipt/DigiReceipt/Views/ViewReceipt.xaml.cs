@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DigiReceipt.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,10 @@ namespace DigiReceipt
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ViewReceipt : ContentPage
     {
-        public ViewReceipt()
+        public ViewReceipt(ReceiptViewModel receiptViewModel)
         {
             InitializeComponent();
+            BindingContext = receiptViewModel;
         }
 
         /// <summary>

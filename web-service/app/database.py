@@ -5,6 +5,8 @@
 import pymongo
 import os
 
+from bson.json_util import dumps
+
 # Specify connection information for MongoDB
 host = os.environ.get('MONGO_HOST', 'localhost')
 port = int(os.environ.get('MONGO_PORT', 5000))
@@ -22,13 +24,13 @@ mongodb.authenticate(user, password)
 
 # Get the collection of receipts
 receipt_collection = mongodb['receipt-collection']
-
-# Return a receipt document with a matching receipt_id.
-# If no receipt matching the query is found return None.
-def retrieve_receipt(receipt_id):
-	receipt = receipt_collection.find_one({'receipt_id': receipt_id})
 	
-	return receipt
+# Return all receipt document belonging to the given user.
+# If no receipt matching the query is found return None.
+def retrieve_user_receipts(user_id, issued_on):
+	receipts = receipt_collection.find({'$and': [ {'user_id': user_id}, {'issuedOn': {'$lt': issued_on}} ] }, {'_id': False}).sort('issuedOn', -1).limit(5)
+	
+	return dumps(receipts)
 
 # Create a new receipt document in MongoDB.
 def create_receipt(data):

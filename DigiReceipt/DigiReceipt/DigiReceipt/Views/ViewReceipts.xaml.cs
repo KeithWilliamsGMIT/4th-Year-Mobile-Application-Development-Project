@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DigiReceipt.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace DigiReceipt
         public ViewReceipts()
         {
             InitializeComponent();
+            BindingContext = new ReceiptsViewModel();
         }
 
         /// <summary>
@@ -41,13 +43,17 @@ namespace DigiReceipt
         }
 
         /// <summary>
-        /// Navigate to the ViewReceipt page when the event is fired.
+        /// Navigate to the ViewReceipt page for the given item when the event is fired.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public async void OnViewReceipt(object sender, EventArgs e)
+        private async void OnListViewItemTapped(object sender, ItemTappedEventArgs e)
         {
-            await Navigation.PushAsync(new ViewReceipt());
+            var item = e.Item as ReceiptViewModel;
+
+            if (item != null) {
+                await Navigation.PushAsync(new ViewReceipt(item));
+            }
         }
     }
 }
