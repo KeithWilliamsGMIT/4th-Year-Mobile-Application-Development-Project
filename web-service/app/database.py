@@ -3,6 +3,7 @@
 # Description:	This module will be used to connect to the database used for this application.
 
 import pymongo
+import uuid
 import os
 
 from bson.json_util import dumps
@@ -24,14 +25,21 @@ mongodb.authenticate(user, password)
 
 # Get the collection of receipts
 receipt_collection = mongodb['receipt-collection']
-	
+
 # Return all receipt document belonging to the given user.
 # If no receipt matching the query is found return None.
 def retrieve_user_receipts(user_id, issued_on):
-	receipts = receipt_collection.find({'$and': [ {'user_id': user_id}, {'issuedOn': {'$lt': issued_on}} ] }, {'_id': False}).sort('issuedOn', -1).limit(5)
+	receipts = receipt_collection.find({'$and': [{'userId': user_id}, {'issuedOn': {'$lt': issued_on}}] }, {'_id': False}).sort('issuedOn', -1).limit(5)
 	
 	return dumps(receipts)
 
 # Create a new receipt document in MongoDB.
-def create_receipt(data):
+def create_user_receipt(user, data):
+	data['userId'] = user
+	data['receiptId'] = uuid.uuid4().hex
+	
 	receipt_collection.insert_one(data)
+
+# Delete a receipt document from MongoDB.
+def delete_user_receipt(user_id, receipt_id):
+	receipts = receipt_collection.find({'$and': [{'userId': user_id}, {'receiptId': receipt_id}] })
