@@ -10,7 +10,7 @@ namespace DigiReceipt.Data
     public class Receipt
     {
         // The id of the receipt.
-        public long ReceiptId { get; set; }
+        public string ReceiptId { get; set; }
 
         // The date the receipt was issued on.
         public long IssuedOn { get; set; }

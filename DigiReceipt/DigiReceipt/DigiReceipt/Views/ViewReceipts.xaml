@@ -6,6 +6,7 @@
              xmlns:behaviours="clr-namespace:DigiReceipt.Behaviours"
              xmlns:converters="clr-namespace:DigiReceipt.Converters"
              x:Class="DigiReceipt.ViewReceipts"
+             x:Name="ViewReceiptsPage"
              Style="{StaticResource PageStyle}"
              Title="{local:Translate txtViewReceiptsPageTitle}">
     <ContentPage.ToolbarItems>
@@ -48,7 +49,7 @@
                         <DataTemplate>
                             <ViewCell>
                                 <ViewCell.View>
-                                    <StackLayout Orientation="Horizontal">
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
                                         <!-- Display image of receipt -->
                                         <Image Source="{Binding Image}" HeightRequest="50" WidthRequest="50" Aspect="AspectFit" BackgroundColor="Black" HorizontalOptions="Center" VerticalOptions="Center"/>
 
@@ -62,6 +63,12 @@
                                                 <Label Text="{local:Translate txtIssuedOnLabel}"/>
                                                 <Label Text="{Binding IssuedOn, StringFormat='{0:dd MMMM, yyyy}'}"/>
                                             </StackLayout>
+                                        </StackLayout>
+                                        
+                                        <!-- Buttons-->
+                                        <StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand">
+                                            <!-- Delete -->
+                                            <Button Command="{Binding Source={x:Reference ViewReceiptsPage}, Path=BindingContext.DeleteReceiptCommand}" CommandParameter="{Binding}" Image="Icons/delete.png" BackgroundColor="Transparent" HorizontalOptions="End"/>
                                         </StackLayout>
                                     </StackLayout>
                                 </ViewCell.View>

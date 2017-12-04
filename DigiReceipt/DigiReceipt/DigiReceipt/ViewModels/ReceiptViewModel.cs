@@ -27,6 +27,11 @@ namespace DigiReceipt.ViewModels
             SaveReceiptCommand = new Command(async () => await OnSaveReceipt());
         }
 
+        public string ReceiptId
+        {
+            get { return This.Receipt.ReceiptId; }
+        }
+
         public DateTime IssuedOn
         {
             get { return new DateTime(This.Receipt.IssuedOn); }
@@ -133,6 +138,14 @@ namespace DigiReceipt.ViewModels
             RaisePropertyChanged(nameof(Image));
             RaisePropertyChanged(nameof(HasNoImage));
             RaisePropertyChanged(nameof(Price));
+        }
+
+        /// <summary>
+        /// Delete this receipt.
+        /// </summary>
+        public async Task DeleteReceipt()
+        {
+            await This.Delete();
         }
     }
 }

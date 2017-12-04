@@ -42,4 +42,4 @@ def create_user_receipt(user, data):
 
 # Delete a receipt document from MongoDB.
 def delete_user_receipt(user_id, receipt_id):
-	receipts = receipt_collection.find({'$and': [{'userId': user_id}, {'receiptId': receipt_id}] })
+	receipts = receipt_collection.delete_one({'$and': [{'userId': user_id}, {'receiptId': receipt_id}] })

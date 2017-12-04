@@ -34,5 +34,13 @@ namespace DigiReceipt.Models
         {
             await Service.Write(Receipt);
         }
+
+        /// <summary>
+        /// Delete this receipt from the web service.
+        /// </summary>
+        public async Task Delete()
+        {
+            await Service.Delete(Receipt.ReceiptId);
+        }
     }
 }
