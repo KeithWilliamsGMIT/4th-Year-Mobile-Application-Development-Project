@@ -8,7 +8,7 @@
     
     <ContentPage.Content>
         <StackLayout HorizontalOptions="CenterAndExpand">
-            <Label Text="{local:Translate txtLoginTitle}" HorizontalOptions="Center" FontSize="Small" FontAttributes="Bold"/>
+            <Label Text="{local:Translate txtLoginTitle}" HorizontalOptions="Center" FontSize="Medium" FontAttributes="Bold"/>
             <Button Text="{local:Translate txtLoginWithGoogleButton}" Style="{StaticResource LoginButtonStyle}" BackgroundColor="#DE4A31" Image="Icons/google.png" Clicked="OnLoginWithGoogle"/>
             <Button Text="{local:Translate txtLoginWithMicrosoftButton}" Style="{StaticResource LoginButtonStyle}" BackgroundColor="#00ADEF" Image="Icons/microsoft.png" Clicked="OnLoginWithMicrosoft"/>
         </StackLayout>
