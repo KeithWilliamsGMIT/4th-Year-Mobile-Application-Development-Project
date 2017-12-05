@@ -51,17 +51,17 @@ namespace DigiReceipt.ViewModels
 
         public ReceiptViewModel SelectedItem
         {
-            get
-            {
-                return selectedItem;
-            }
-
+            get { return selectedItem; }
             set
             {
                 selectedItem = value;
                 RaisePropertyChanged(nameof(SelectedItem));
-
             }
+        }
+
+        public bool HasNoReceipts
+        {
+            get { return !IsLoading && Receipts.Count == 0; }
         }
 
         public DateTime IssuedAfter
@@ -85,6 +85,7 @@ namespace DigiReceipt.ViewModels
             {
                 isLoading = value;
                 RaisePropertyChanged(nameof(IsLoading));
+                RaisePropertyChanged(nameof(HasNoReceipts));
             }
         }
 
