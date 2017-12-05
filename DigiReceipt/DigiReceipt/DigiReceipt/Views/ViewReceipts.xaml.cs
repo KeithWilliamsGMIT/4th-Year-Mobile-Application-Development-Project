@@ -12,10 +12,13 @@ namespace DigiReceipt
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ViewReceipts : ContentPage
     {
+        private ReceiptsViewModel viewModel;
+
         public ViewReceipts()
         {
             InitializeComponent();
-            BindingContext = new ReceiptsViewModel();
+            viewModel = new ReceiptsViewModel();
+            BindingContext = viewModel;
         }
 
         /// <summary>
@@ -28,7 +31,7 @@ namespace DigiReceipt
             await AuthenticationManager.DefaultAuthenticationManager.CurrentClient.LogoutAsync();
             AuthenticationManager.DefaultAuthenticationManager.CurrentUser = null;
             AuthenticationManager.DefaultAuthenticationManager.IsAuthenticated = false;
-            await Navigation.PopAsync();
+            await Navigation.PopToRootAsync();
         }
 
         /// <summary>
@@ -53,6 +56,15 @@ namespace DigiReceipt
             if (item != null) {
                 await Navigation.PushAsync(new ViewReceipt(item));
             }
+        }
+
+        /// <summary>
+        /// Refresh the data in the list after navigating to this page
+        /// </summary>
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            viewModel.RefreshReceipts();
         }
     }
 }

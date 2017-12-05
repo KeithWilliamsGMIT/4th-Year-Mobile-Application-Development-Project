@@ -137,6 +137,7 @@ namespace DigiReceipt.ViewModels
             SelectedItem = null;
             Receipts.Remove(receipt);
             RaisePropertyChanged(nameof(Receipts));
+            RaisePropertyChanged(nameof(HasNoReceipts));
         }
 
         /// <summary>
@@ -153,7 +154,7 @@ namespace DigiReceipt.ViewModels
         /// <summary>
         /// Refresh the list of receipts.
         /// </summary>
-        private void RefreshReceipts()
+        public void RefreshReceipts()
         {
             Receipts.Remove(SelectedItem);
             SelectedItem = null;
