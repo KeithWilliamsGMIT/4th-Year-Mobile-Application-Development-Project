@@ -132,7 +132,14 @@ namespace DigiReceipt.ViewModels
         /// </summary>
         private async Task OnSaveReceipt()
         {
-            await This.Save();
+            if (This.Receipt.ReceiptId == null || This.Receipt.ReceiptId == String.Empty)
+            {
+                await This.Create();
+            } else
+            {
+                await This.Update();
+            }
+
             This = new ReceiptModel();
             RaisePropertyChanged(nameof(IssuedOn));
             RaisePropertyChanged(nameof(Image));

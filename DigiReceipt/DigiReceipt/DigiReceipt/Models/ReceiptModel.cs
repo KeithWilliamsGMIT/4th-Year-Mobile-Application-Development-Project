@@ -30,9 +30,17 @@ namespace DigiReceipt.Models
         /// <summary>
         /// Finalise receipt and save to the web service.
         /// </summary>
-        public async Task Save()
+        public async Task Create()
         {
-            await Service.Write(Receipt);
+            await Service.Create(Receipt);
+        }
+
+        /// <summary>
+        /// Update the receipt on the web service.
+        /// </summary>
+        public async Task Update()
+        {
+            await Service.Update(Receipt);
         }
 
         /// <summary>

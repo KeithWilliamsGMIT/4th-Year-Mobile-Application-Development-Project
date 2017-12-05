@@ -71,7 +71,10 @@
                                         </StackLayout>
                                         
                                         <!-- Buttons-->
-                                        <StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand">
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand">
+                                            <!-- Edit -->
+                                            <Button Command="{Binding Source={x:Reference ViewReceiptsPage}, Path=BindingContext.EditReceiptCommand}" CommandParameter="{Binding}" Image="Icons/edit.png" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="Center"/>
+
                                             <!-- Delete -->
                                             <Button Command="{Binding Source={x:Reference ViewReceiptsPage}, Path=BindingContext.DeleteReceiptCommand}" CommandParameter="{Binding}" Image="Icons/delete.png" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="Center"/>
                                         </StackLayout>

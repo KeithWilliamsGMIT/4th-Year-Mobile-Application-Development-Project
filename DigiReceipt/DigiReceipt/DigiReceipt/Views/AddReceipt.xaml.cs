@@ -13,10 +13,12 @@ namespace DigiReceipt
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddReceipt : ContentPage
     {
-        public AddReceipt()
+        public AddReceipt() : this(new ReceiptViewModel()) { }
+
+        public AddReceipt(ReceiptViewModel receiptViewModel)
         {
             InitializeComponent();
-            BindingContext = new ReceiptViewModel();
+            BindingContext = receiptViewModel;
         }
 
         /// <summary>
