@@ -6,27 +6,35 @@ from flask import Flask, request
 from json import dumps
 import os
 
-from .database import retrieve_user_receipts, create_receipt
+from .database import retrieve_user_receipts, create_user_receipt, delete_user_receipt
 
 app = Flask(__name__)
 
 # GET - Return users receipts created after a given timestamp.
-@app.route('/api/<user>/receipts/<issued_on>', methods=['GET'])
-def get_receipts(user, issued_on):
-	response = {'status': 'success', 'message': 'Successfully retrieved receipts for user - ' + user, 'receipts': None}
+@app.route('/api/<user_id>/receipts/<issued_on>', methods=['GET'])
+def get_receipts(user_id, issued_on):
+	response = {'status': 'success', 'message': 'Successfully retrieved receipts for user - ' + user_id, 'receipts': None}
 	
-	response['receipts'] = retrieve_user_receipts(user, issued_on)
+	response['receipts'] = retrieve_user_receipts(user_id, issued_on)
 	
 	return dumps(response)
 
 # POST - Add the given receipt to the users list of receipts.
-@app.route('/api/<user>/receipt', methods=['POST'])
-def post_receipt(user):
-	response = {'status': 'success', 'message': 'Successfully added receipt for user - ' + user}
+@app.route('/api/<user_id>/receipt', methods=['POST'])
+def post_receipt(user_id):
+	response = {'status': 'success', 'message': 'Successfully added receipt for user - ' + user_id}
 	
 	data = request.get_json()
-	data['user_id'] = user
 	
-	create_receipt(data)
+	create_user_receipt(user_id, data)
+	
+	return dumps(response)
+
+# DELETE - Delete the given receipt from the users list of receipts.
+@app.route('/api/<user_id>/receipt/<receipt_id>', methods=['DELETE'])
+def delete_receipt(user_id, receipt_id):
+	response = {'status': 'success', 'message': 'Successfully delete receipt for user - ' + user_id}
+	
+	delete_user_receipt(user_id, receipt_id)
 	
 	return dumps(response)

@@ -110,6 +110,7 @@
   <ItemGroup>
     <Content Include="Icons\add.png" />
     <Content Include="Icons\back.png" />
+    <Content Include="Icons\delete.png" />
     <Content Include="Icons\google.png" />
     <Content Include="Icons\logout.png" />
     <Content Include="Icons\microsoft.png" />

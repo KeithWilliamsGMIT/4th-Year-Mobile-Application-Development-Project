@@ -6,8 +6,10 @@
              xmlns:behaviours="clr-namespace:DigiReceipt.Behaviours"
              xmlns:converters="clr-namespace:DigiReceipt.Converters"
              x:Class="DigiReceipt.ViewReceipts"
+             x:Name="ViewReceiptsPage"
              Style="{StaticResource PageStyle}"
              Title="{local:Translate txtViewReceiptsPageTitle}">
+    
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="{local:Translate txtLogoutButton}" Icon="Icons/logout.png" Clicked="OnLogout"/>
         <ToolbarItem Text="{local:Translate txtAddReceiptButton}" Icon="Icons/add.png" Clicked="OnAddReceipt"/>
@@ -27,7 +29,9 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             
-            <StackLayout Grid.Row="0">
+            <StackLayout Grid.Row="0" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Label Text="{local:Translate txtReceiptBeforeLabel}" VerticalOptions="CenterAndExpand"/>
+                
                 <DatePicker VerticalOptions="CenterAndExpand" Date="{Binding IssuedAfter, Mode=TwoWay}" MaximumDate="{x:Static sys:DateTime.Now}">
                     <DatePicker.Format>dd-MM-yyyy</DatePicker.Format>
                 </DatePicker>
@@ -36,6 +40,8 @@
             <StackLayout Grid.Row="1">
                 <Label Text="{local:Translate txtLoadingLabel}" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsLoading}" FontSize="Medium" FontAttributes="Bold"/>
 
+                <Label Text="{local:Translate txtNoReceiptsLabel}" HorizontalOptions="CenterAndExpand" IsVisible="{Binding HasNoReceipts}"/>
+                
                 <ListView Grid.Row="1" ItemsSource="{Binding Receipts, Mode=OneWay}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" ItemTapped="OnListViewItemTapped">
                     <ListView.Behaviors>
                         <behaviours:ListViewPagningBehavior
@@ -48,7 +54,7 @@
                         <DataTemplate>
                             <ViewCell>
                                 <ViewCell.View>
-                                    <StackLayout Orientation="Horizontal">
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
                                         <!-- Display image of receipt -->
                                         <Image Source="{Binding Image}" HeightRequest="50" WidthRequest="50" Aspect="AspectFit" BackgroundColor="Black" HorizontalOptions="Center" VerticalOptions="Center"/>
 
@@ -62,6 +68,12 @@
                                                 <Label Text="{local:Translate txtIssuedOnLabel}"/>
                                                 <Label Text="{Binding IssuedOn, StringFormat='{0:dd MMMM, yyyy}'}"/>
                                             </StackLayout>
+                                        </StackLayout>
+                                        
+                                        <!-- Buttons-->
+                                        <StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand">
+                                            <!-- Delete -->
+                                            <Button Command="{Binding Source={x:Reference ViewReceiptsPage}, Path=BindingContext.DeleteReceiptCommand}" CommandParameter="{Binding}" Image="Icons/delete.png" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="Center"/>
                                         </StackLayout>
                                     </StackLayout>
                                 </ViewCell.View>

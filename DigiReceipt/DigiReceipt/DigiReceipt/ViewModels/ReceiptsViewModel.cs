@@ -18,6 +18,7 @@ namespace DigiReceipt.ViewModels
     public class ReceiptsViewModel : NotificationBase<ReceiptsModel>
     {
         public ICommand LoadNextReceiptsCommand { get; private set; }
+        public ICommand DeleteReceiptCommand { get; private set; }
 
         // Collection of receipts to display to the user.
         private ObservableCollection<ReceiptViewModel> receipts = new ObservableCollection<ReceiptViewModel>();
@@ -39,6 +40,7 @@ namespace DigiReceipt.ViewModels
 
             // Setup commands.
             LoadNextReceiptsCommand = new Command(async () => await OnLoadNextReceipts());
+            DeleteReceiptCommand = new Command(async (receipt) => await OnDeleteReceipt(receipt));
         }
         
         public ObservableCollection<ReceiptViewModel> Receipts
@@ -49,17 +51,17 @@ namespace DigiReceipt.ViewModels
 
         public ReceiptViewModel SelectedItem
         {
-            get
-            {
-                return selectedItem;
-            }
-
+            get { return selectedItem; }
             set
             {
                 selectedItem = value;
                 RaisePropertyChanged(nameof(SelectedItem));
-
             }
+        }
+
+        public bool HasNoReceipts
+        {
+            get { return !IsLoading && Receipts.Count == 0; }
         }
 
         public DateTime IssuedAfter
@@ -83,6 +85,7 @@ namespace DigiReceipt.ViewModels
             {
                 isLoading = value;
                 RaisePropertyChanged(nameof(IsLoading));
+                RaisePropertyChanged(nameof(HasNoReceipts));
             }
         }
 
@@ -118,6 +121,20 @@ namespace DigiReceipt.ViewModels
 
                 IsLoading = false;
             }
+        }
+
+        /// <summary>
+        /// Delete the given receipt and remove it from the list.
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        private async Task OnDeleteReceipt(object obj)
+        {
+            ReceiptViewModel receipt = (ReceiptViewModel) obj;
+            await receipt.DeleteReceipt();
+            SelectedItem = null;
+            Receipts.Remove(receipt);
+            RaisePropertyChanged(nameof(Receipts));
         }
 
         /// <summary>

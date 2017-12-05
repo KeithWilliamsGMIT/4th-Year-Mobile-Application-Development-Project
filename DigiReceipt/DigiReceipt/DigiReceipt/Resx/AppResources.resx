@@ -138,6 +138,9 @@
   <data name="txtLoginPageTitle" xml:space="preserve">
     <value>DigiReceipt</value>
   </data>
+  <data name="txtLoginTitle" xml:space="preserve">
+    <value>Login using an existing account!</value>
+  </data>
   <data name="txtLoginWithGoogleButton" xml:space="preserve">
     <value>Login with Google</value>
   </data>
@@ -150,8 +153,14 @@
   <data name="txtNoImageLabel" xml:space="preserve">
     <value>No Image Available!</value>
   </data>
+  <data name="txtNoReceiptsLabel" xml:space="preserve">
+    <value>No Receipts Found!</value>
+  </data>
   <data name="txtPriceLabel" xml:space="preserve">
     <value>Price</value>
+  </data>
+  <data name="txtReceiptBeforeLabel" xml:space="preserve">
+    <value>Receipts Before</value>
   </data>
   <data name="txtSaveReceiptButton" xml:space="preserve">
     <value>Save</value>

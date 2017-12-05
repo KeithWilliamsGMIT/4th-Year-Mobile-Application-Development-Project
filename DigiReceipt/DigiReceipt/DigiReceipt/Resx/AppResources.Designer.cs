@@ -125,6 +125,15 @@ namespace DigiReceipt.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login using an existing account!.
+        /// </summary>
+        internal static string txtLoginTitle {
+            get {
+                return ResourceManager.GetString("txtLoginTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login with Google.
         /// </summary>
         internal static string txtLoginWithGoogleButton {
@@ -161,11 +170,29 @@ namespace DigiReceipt.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No Receipts Found!.
+        /// </summary>
+        internal static string txtNoReceiptsLabel {
+            get {
+                return ResourceManager.GetString("txtNoReceiptsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Price.
         /// </summary>
         internal static string txtPriceLabel {
             get {
                 return ResourceManager.GetString("txtPriceLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Receipts Before.
+        /// </summary>
+        internal static string txtReceiptBeforeLabel {
+            get {
+                return ResourceManager.GetString("txtReceiptBeforeLabel", resourceCulture);
             }
         }
         
