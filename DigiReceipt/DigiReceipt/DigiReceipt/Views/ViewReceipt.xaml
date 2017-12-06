@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:DigiReceipt"
+             xmlns:markup="clr-namespace:DigiReceipt.Markup"
              x:Class="DigiReceipt.ViewReceipt"
              Style="{StaticResource PageStyle}"
-             Title="{local:Translate txtViewReceiptPageTitle}">
+             Title="{markup:Translate txtViewReceiptPageTitle}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="{local:Translate txtBackButton}" Icon="Icons/back.png" Clicked="OnBack"/>
-        <ToolbarItem Text="{local:Translate txtAddReceiptButton}" Icon="Icons/add.png" Clicked="OnAddReceipt"/>
+        <ToolbarItem Text="{markup:Translate txtBackButton}" Icon="Icons/back.png" Clicked="OnBack"/>
+        <ToolbarItem Text="{markup:Translate txtAddReceiptButton}" Icon="Icons/add.png" Clicked="OnAddReceipt"/>
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
@@ -18,19 +18,19 @@
             </Grid.RowDefinitions>
 
             <BoxView Color="Black"/>
-            <Label Text="{local:Translate txtNoImageLabel}" TextColor="White" IsVisible="{Binding HasNoImage}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            <Label Text="{markup:Translate txtNoImageLabel}" TextColor="White" IsVisible="{Binding HasNoImage}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
             <Image Source="{Binding Image, Mode=OneWay}" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
 
             <StackLayout Grid.Row="1">
-                <Label Text="{local:Translate txtDetailsLabel}" FontSize="Large"/>
+                <Label Text="{markup:Translate txtDetailsLabel}" FontSize="Large"/>
                 
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="{local:Translate txtPriceLabel}"/>
+                    <Label Text="{markup:Translate txtPriceLabel}"/>
                     <Label Text="{Binding Price, StringFormat='{0:C}'}"/>
                 </StackLayout>
                 
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="{local:Translate txtIssuedOnLabel}"/>
+                    <Label Text="{markup:Translate txtIssuedOnLabel}"/>
                     <Label Text="{Binding IssuedOn, StringFormat='{0:dd MMMM, yyyy}'}"/>
                 </StackLayout>
             </StackLayout>

@@ -1,18 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:DigiReceipt"
+             xmlns:markup="clr-namespace:DigiReceipt.Markup"
+             xmlns:converters="clr-namespace:DigiReceipt.Converters"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              x:Class="DigiReceipt.AddReceipt"
              Style="{StaticResource PageStyle}"
-             Title="{local:Translate txtAddReceiptPageTitle}">
+             Title="{markup:Translate txtAddReceiptPageTitle}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="{local:Translate txtBackButton}" Icon="Icons/back.png" Clicked="OnBack"/>
+        <ToolbarItem Text="{markup:Translate txtBackButton}" Icon="Icons/back.png" Clicked="OnBack"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <local:BooleanConverter x:Key="BooleanConverter"/>
+            <converters:BooleanConverter x:Key="BooleanConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -24,20 +25,20 @@
             </Grid.RowDefinitions>
             
             <BoxView Color="Black"/>
-            <Label Text="{local:Translate txtNoImageLabel}" TextColor="White" IsVisible="{Binding HasNoImage}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            <Label Text="{markup:Translate txtNoImageLabel}" TextColor="White" IsVisible="{Binding HasNoImage}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
             <Image Source="{Binding Image, Mode=OneWay}" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
 
             <StackLayout Grid.Row="1">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                     <!-- Take a picture with the camera -->
-                    <Button Text="{local:Translate txtTakePhotoButton}" Command="{Binding TakePhotoCommand}" HorizontalOptions="FillAndExpand"/>
+                    <Button Text="{markup:Translate txtTakePhotoButton}" Command="{Binding TakePhotoCommand}" HorizontalOptions="FillAndExpand"/>
 
                     <!-- Select a picture from the users device -->
-                    <Button Text="{local:Translate txtSelectPhotoButton}" Command="{Binding SelectPhotoCommand}" HorizontalOptions="FillAndExpand"/>
+                    <Button Text="{markup:Translate txtSelectPhotoButton}" Command="{Binding SelectPhotoCommand}" HorizontalOptions="FillAndExpand"/>
                 </StackLayout>
 
                 <!-- Choose the date which the receipt was issued on -->
-                <Label Text="{local:Translate txtIssuedOnLabel}"/>
+                <Label Text="{markup:Translate txtIssuedOnLabel}"/>
 
                 <StackLayout>
                     <DatePicker VerticalOptions="CenterAndExpand" Date="{Binding IssuedOn, Mode=TwoWay}" MaximumDate="{x:Static sys:DateTime.Now}">
@@ -46,14 +47,14 @@
                 </StackLayout>
 
                 <!-- Enter price on receipt -->
-                <Label Text="{local:Translate txtPriceLabel}"/>
+                <Label Text="{markup:Translate txtPriceLabel}"/>
                 <Entry Text="{Binding Price, Mode=TwoWay}"/>
                 
                 <!-- Save the new receipt -->
-                <Button Text="{local:Translate txtSaveReceiptButton}" Command="{Binding SaveReceiptCommand}"/>
+                <Button Text="{markup:Translate txtSaveReceiptButton}" Command="{Binding SaveReceiptCommand}"/>
 
                 <!-- Offline message -->
-                <Label Text="{local:Translate txtOfflineLabel}" BackgroundColor="Black" TextColor="White" IsVisible="{Binding IsOnline, Converter={StaticResource BooleanConverter}}"/>
+                <Label Text="{markup:Translate txtOfflineLabel}" BackgroundColor="Black" TextColor="White" IsVisible="{Binding IsOnline, Converter={StaticResource BooleanConverter}}"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

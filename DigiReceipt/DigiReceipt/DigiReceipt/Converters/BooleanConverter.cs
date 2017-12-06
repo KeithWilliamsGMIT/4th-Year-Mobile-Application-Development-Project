@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace DigiReceipt
+namespace DigiReceipt.Converters
 {
     // Adapted from https://forums.xamarin.com/discussion/36714/how-to-in-a-binding-in-xaml
     public class BooleanConverter : IValueConverter

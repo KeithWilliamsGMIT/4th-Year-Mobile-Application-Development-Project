@@ -75,6 +75,14 @@ The following is a list of project outcomes.
   * Create, Read, Update, Delete
 * Used the device camera for taking pictures of receipts.
 * Application was built with localisation in mind (Strings put in resource file).
+* User can login using different identity providers (Google and Microsoft)
+* Developed the interface with user experience in mind:
+  * Simple UI that works on both mobile and desktop.
+  * Minimised number of controls on screen.
+  * Tried to minimise clicks needed to navigate around application.
+  * Used icons instead of text where appropriate.
+  * Added messages to inform the user of whats happening.
+  * Consistant colour theme throughout application.
 * Developed the application in an Agile manner:
   * Used the GitHub Flow
   * Used GitHub Issues
@@ -91,6 +99,8 @@ This was one of the original objectives outlined at the start of the project. Th
 Currently, the application requires an internet connection. This is because of it's heavy reliance on the web service. Also, due to the nature of the data this application handles, the user must sign in to the application to view receipts. One possible enhancement that could be added would be to allow the user to add a receipt when offline, which would be sent to saved to the database when the user connects to the internet. This would involve allowing the user access to the add receipt page when offline, save the json document to local storage and then when the device is connected to the internet start a background task that would save the receipts to the database. However, using local store, starting background tasks and checking the internet connection can be difficult when developing a cross-platform application. Therefore, I decided not to use this approach. Instead, to overcome this, I added an option to the add receipt page to browse for an image. Therefore, the user can take a receipt of an image at anytime and then save use that the next time they are connected to the internet. Another possible solution would be to implement PouchDB on the client and CouchDB on the server and have them sync automatically.
 * Client-managed authentication  
 Currently a server-managed authentication flow is used to authenticate users. While this is the easier and quicker of the two to implement, the client-managed authentication flow would offer a better user experience and should be considered as a possible enhancement.
+* Analyse data
+This feature was always out of scope for this project, but the idea is to help the user track and manage their finances. A feature where the user can monitor and analyse the data through the use of charts and graphs would be a very useful future enhancement.
 
 ### Conclusion
-After completing this project I have found that there is still significantly more work involved in developing a cross-platform application. Due to differences between platforms I was unable to implement some useful functionality that would improve the user experience. However, I have found workarounds for each of these situations. If I were to do this project again, due to the timeline and scope for this project, I would only develop for UWP. Xamarin is useful for simple apps but when dealing with even moderately complex applications the project can get quite difficult to manage quite quick. The plugins available for Xamarin solve this problem to an extent, but not entirely.s
+After completing this project I have found that there is still significantly more work involved in developing a cross-platform application. Due to differences between platforms I was unable to implement some useful functionality that would improve the user experience. However, I have found workarounds for each of these situations. Perhaps the scope of this project was too big in relative to the timeframe. Therefore, if I were to do this project again I would only develop for UWP. Xamarin is useful for simple apps but when dealing with even moderately complex applications the project can get quite difficult to manage quite quick. The plugins available for Xamarin solve this problem to an extent, but not entirely. While there is still additional features that can be added to this project, I think that it was a reasonable first attempt at developing a cross-platform application.
