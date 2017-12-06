@@ -43,3 +43,7 @@ def create_user_receipt(user, data):
 # Delete a receipt document from MongoDB.
 def delete_user_receipt(user_id, receipt_id):
 	receipts = receipt_collection.delete_one({'$and': [{'userId': user_id}, {'receiptId': receipt_id}] })
+
+# Update a receipt document in MongoDB.
+def update_user_receipt(user_id, receipt_id, data):
+	receipt_collection.update_one({'$and': [{'userId': user_id}, {'receiptId': receipt_id}] }, {'$set': { 'price': data['price'], 'issuedOn': data['issuedOn'], 'image': data['image'] }})

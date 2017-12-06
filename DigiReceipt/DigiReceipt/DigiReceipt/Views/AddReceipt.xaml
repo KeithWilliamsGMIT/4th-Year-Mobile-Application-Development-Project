@@ -42,7 +42,7 @@
                 <!-- Enter price on receipt -->
                 <Label Text="{local:Translate txtPriceLabel}"/>
                 <Entry Text="{Binding Price, Mode=TwoWay}"/>
-
+                
                 <!-- Save the new receipt -->
                 <Button Text="{local:Translate txtSaveReceiptButton}" Command="{Binding SaveReceiptCommand}"/>
             </StackLayout>

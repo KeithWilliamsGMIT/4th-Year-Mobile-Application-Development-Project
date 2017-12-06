@@ -6,7 +6,7 @@ from flask import Flask, request
 from json import dumps
 import os
 
-from .database import retrieve_user_receipts, create_user_receipt, delete_user_receipt
+from .database import retrieve_user_receipts, create_user_receipt, delete_user_receipt, update_user_receipt
 
 app = Flask(__name__)
 
@@ -36,5 +36,16 @@ def delete_receipt(user_id, receipt_id):
 	response = {'status': 'success', 'message': 'Successfully delete receipt for user - ' + user_id}
 	
 	delete_user_receipt(user_id, receipt_id)
+	
+	return dumps(response)
+
+# PUT - Update the receipt with the given id.
+@app.route('/api/<user_id>/receipt/<receipt_id>', methods=['PUT'])
+def put_receipt(user_id, receipt_id):
+	response = {'status': 'success', 'message': 'Successfully updated receipt for user - ' + user_id}
+	
+	data = request.get_json()
+	
+	update_user_receipt(user_id, receipt_id, data)
 	
 	return dumps(response)

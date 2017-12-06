@@ -19,6 +19,7 @@ namespace DigiReceipt.ViewModels
     {
         public ICommand LoadNextReceiptsCommand { get; private set; }
         public ICommand DeleteReceiptCommand { get; private set; }
+        public ICommand EditReceiptCommand { get; private set; }
 
         // Collection of receipts to display to the user.
         private ObservableCollection<ReceiptViewModel> receipts = new ObservableCollection<ReceiptViewModel>();
@@ -41,6 +42,7 @@ namespace DigiReceipt.ViewModels
             // Setup commands.
             LoadNextReceiptsCommand = new Command(async () => await OnLoadNextReceipts());
             DeleteReceiptCommand = new Command(async (receipt) => await OnDeleteReceipt(receipt));
+            EditReceiptCommand = new Command(async (receipt) => await OnEditReceipt(receipt));
         }
         
         public ObservableCollection<ReceiptViewModel> Receipts
@@ -130,17 +132,29 @@ namespace DigiReceipt.ViewModels
         /// <returns></returns>
         private async Task OnDeleteReceipt(object obj)
         {
-            ReceiptViewModel receipt = (ReceiptViewModel) obj;
+            ReceiptViewModel receipt = (ReceiptViewModel)obj;
             await receipt.DeleteReceipt();
             SelectedItem = null;
             Receipts.Remove(receipt);
             RaisePropertyChanged(nameof(Receipts));
+            RaisePropertyChanged(nameof(HasNoReceipts));
+        }
+
+        /// <summary>
+        /// Navigate to a page where the user can edit the receipt.
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        private async Task OnEditReceipt(object obj)
+        {
+            ReceiptViewModel receipt = (ReceiptViewModel)obj;
+            await Application.Current.MainPage.Navigation.PushAsync(new AddReceipt(receipt));
         }
 
         /// <summary>
         /// Refresh the list of receipts.
         /// </summary>
-        private void RefreshReceipts()
+        public void RefreshReceipts()
         {
             Receipts.Remove(SelectedItem);
             SelectedItem = null;

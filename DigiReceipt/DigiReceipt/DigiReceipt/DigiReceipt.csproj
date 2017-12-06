@@ -43,11 +43,13 @@
     <Compile Include="Data\Receipt.cs" />
     <Compile Include="Models\ReceiptsModel.cs" />
     <Compile Include="Models\ReceiptModel.cs" />
+    <Compile Include="BooleanConverter.cs" />
     <Compile Include="Resx\AppResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ReceiptsViewModel.cs" />
     <Compile Include="ViewModels\ReceiptViewModel.cs" />
     <Compile Include="ViewModels\NotificationBase.cs" />

@@ -128,16 +128,19 @@ namespace DigiReceipt.ViewModels
         }
 
         /// <summary>
-        /// Save the new receipt.
+        /// Save the new, or changed, receipt and go back to the ViewReceipts page.
         /// </summary>
         private async Task OnSaveReceipt()
         {
-            await This.Save();
-            This = new ReceiptModel();
-            RaisePropertyChanged(nameof(IssuedOn));
-            RaisePropertyChanged(nameof(Image));
-            RaisePropertyChanged(nameof(HasNoImage));
-            RaisePropertyChanged(nameof(Price));
+            if (This.Receipt.ReceiptId == null || This.Receipt.ReceiptId == String.Empty)
+            {
+                await This.Create();
+            } else
+            {
+                await This.Update();
+            }
+            
+            await Application.Current.MainPage.Navigation.PushAsync(new ViewReceipts());
         }
 
         /// <summary>

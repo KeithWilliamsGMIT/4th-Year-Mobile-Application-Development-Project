@@ -5,12 +5,25 @@
              x:Class="DigiReceipt.Login"
              Style="{StaticResource PageStyle}"
              Title="{local:Translate txtLoginPageTitle}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:BooleanConverter x:Key="BooleanConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="CenterAndExpand">
-            <Label Text="{local:Translate txtLoginTitle}" HorizontalOptions="Center" FontSize="Medium" FontAttributes="Bold"/>
-            <Button Text="{local:Translate txtLoginWithGoogleButton}" Style="{StaticResource LoginButtonStyle}" BackgroundColor="#DE4A31" Image="Icons/google.png" Clicked="OnLoginWithGoogle"/>
-            <Button Text="{local:Translate txtLoginWithMicrosoftButton}" Style="{StaticResource LoginButtonStyle}" BackgroundColor="#00ADEF" Image="Icons/microsoft.png" Clicked="OnLoginWithMicrosoft"/>
+        <StackLayout Orientation="Vertical" HorizontalOptions="Fill" VerticalOptions="Fill">
+            <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" IsVisible="{Binding IsLoggingIn, Converter={StaticResource BooleanConverter}}">
+                <Label Text="{local:Translate txtLoginTitle}" HorizontalOptions="Center" FontSize="Medium" FontAttributes="Bold"/>
+                <Button Text="{local:Translate txtLoginWithGoogleButton}" Style="{StaticResource LoginButtonStyle}" Command="{Binding GoogleLoginCommand}" BackgroundColor="#DE4A31" Image="Icons/google.png"/>
+                <Button Text="{local:Translate txtLoginWithMicrosoftButton}" Style="{StaticResource LoginButtonStyle}" Command="{Binding MicrosoftLoginCommand}" BackgroundColor="#00ADEF" Image="Icons/microsoft.png"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsVisible="{Binding IsLoggingIn}">
+                <Label Text="{local:Translate txtPleaseWaitLabel}" HorizontalOptions="Center" FontSize="Large"/>
+                <Label Text="{local:Translate txtLoggingYouInLabel}" HorizontalOptions="Center" FontSize="Small"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

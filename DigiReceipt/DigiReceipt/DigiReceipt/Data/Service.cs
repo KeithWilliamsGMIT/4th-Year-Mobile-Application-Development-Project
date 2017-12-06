@@ -20,7 +20,7 @@ namespace DigiReceipt.Data
         /// </summary>
         /// <param name="receipt"></param>
         /// <returns></returns>
-        public static async Task<dynamic> Write(Receipt receipt)
+        public static async Task<dynamic> Create(Receipt receipt)
         {
             HttpClient client = new HttpClient();
 
@@ -39,6 +39,40 @@ namespace DigiReceipt.Data
 
             // Post the data and wait for a response from the server.
             var response = await client.PostAsync(String.Format(URL_USER_RECEIPT, id), content);
+
+            dynamic data = null;
+
+            if (response != null)
+            {
+                data = response.Content.ReadAsStringAsync().Result;
+            }
+
+            return data;
+        }
+
+        /// <summary>
+        /// Send the given receipt to the web service to be updated.
+        /// </summary>
+        /// <param name="receipt"></param>
+        /// <returns></returns>
+        public static async Task<dynamic> Update(Receipt receipt)
+        {
+            HttpClient client = new HttpClient();
+
+            // Get the current users id to determine who the receipt belongs to.
+            string id = AuthenticationManager.DefaultAuthenticationManager.CurrentUser.UserId.Split(':')[1];
+
+            // This dictionary will be converted to JSON and will be sent in the request body.
+            var body = new Dictionary<string, Object> {
+                            { "issuedOn", receipt.IssuedOn.ToString() },
+                            { "image", receipt.ImageAsBase64() },
+                            { "price", receipt.Price },
+                        };
+
+            HttpContent content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json");
+
+            // Post the data and wait for a response from the server.
+            var response = await client.PutAsync(String.Format(URL_USER_RECEIPT_ID, id, receipt.ReceiptId), content);
 
             dynamic data = null;
 
