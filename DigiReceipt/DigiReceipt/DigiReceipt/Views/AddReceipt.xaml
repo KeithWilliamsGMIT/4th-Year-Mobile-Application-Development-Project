@@ -10,6 +10,12 @@
         <ToolbarItem Text="{local:Translate txtBackButton}" Icon="Icons/back.png" Clicked="OnBack"/>
     </ContentPage.ToolbarItems>
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:BooleanConverter x:Key="BooleanConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -45,6 +51,9 @@
                 
                 <!-- Save the new receipt -->
                 <Button Text="{local:Translate txtSaveReceiptButton}" Command="{Binding SaveReceiptCommand}"/>
+
+                <!-- Offline message -->
+                <Label Text="{local:Translate txtOfflineLabel}" BackgroundColor="Black" TextColor="White" IsVisible="{Binding IsOnline, Converter={StaticResource BooleanConverter}}"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

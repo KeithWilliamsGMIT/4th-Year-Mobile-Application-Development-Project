@@ -188,6 +188,15 @@ namespace DigiReceipt.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Offline - Connect and try again!.
+        /// </summary>
+        internal static string txtOfflineLabel {
+            get {
+                return ResourceManager.GetString("txtOfflineLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please Wait....
         /// </summary>
         internal static string txtPleaseWaitLabel {
