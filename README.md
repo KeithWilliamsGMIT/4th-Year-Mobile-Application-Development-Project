@@ -46,13 +46,13 @@ First ensure you have Python 3 installed. The easiest way to install Python is t
 cd web-service
 
 # Create the virtual environment
-virtualenv -p python3 venv
+virtualenv venv
 
 # Activate the environment
-source venv/bin/activate
+venv/Scripts/activate
 
 # Install the requirements
-pip3 install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 Before starting the web service you will also need to download the Tesseract OCR library on which it depends. The [instructions](https://github.com/tesseract-ocr/tesseract/wiki) are available on the project wiki on GitHub. A local instance of MongoDB must also be running. Instructions for installing MongoDB can be found on the online [manual](https://docs.mongodb.com/manual/installation/). Finally, use the below commands to start the web service.
@@ -62,3 +62,35 @@ python3 main.py
 ```
 
 The web service should now be running on [http://localhost:5000](http://localhost:5000).
+
+### Project Outcomes
+The following is a list of project outcomes.
+* Used the MVVM design pattern to develop the application.
+* Developed a cross-platform application for UWP and Android using Xamarin.
+* 3-tier architecture
+  * Mobile application (Presentation layer)
+  * Python web service (Application layer)
+  * MongoDB (Data layer)
+* Application has full CRUD functionality.
+  * Create, Read, Update, Delete
+* Used the device camera for taking pictures of receipts.
+* Application was built with localisation in mind (Strings put in resource file).
+* Developed the application in an Agile manner:
+  * Used the GitHub Flow
+  * Used GitHub Issues
+  * Used GitHub Projects
+  * Used GitHub Wiki
+  * Develop the application in an iterative and incremental manner.
+* Deployed the web service to Azure and the MongoDB is hosted on MLab.
+* Submit the finished application to Windows Store and Play Store.
+
+### Enhancements
+* Extract data from image of receipt  
+This was one of the original objectives outlined at the start of the project. The goal was to implement some way to parse data from an image of a receipt. The goal was to improve the user experience by saving the user time as they would not need to enter the date and total amount due when saving a new receipt to the database. First I attempted to implement this on the server side as I thought it would be an intensive task for mobile devices. However, although I was able to get the basic functionality working locally, it used the Tesseract library, which I was unable to install on Azure. Next, I tried to implement it client side but could not find a cross-platform solution that would work on both UWP and Android.One solution to this might be to use Microsoft Cognitive Services to extract the text from an image. However, I had already invested too much time into this feature and could not afford to invest any more. Therefore, I've left this feature as a possible enhancement.
+* Offline use.  
+Currently, the application requires an internet connection. This is because of it's heavy reliance on the web service. Also, due to the nature of the data this application handles, the user must sign in to the application to view receipts. One possible enhancement that could be added would be to allow the user to add a receipt when offline, which would be sent to saved to the database when the user connects to the internet. This would involve allowing the user access to the add receipt page when offline, save the json document to local storage and then when the device is connected to the internet start a background task that would save the receipts to the database. However, using local store, starting background tasks and checking the internet connection can be difficult when developing a cross-platform application. Therefore, I decided not to use this approach. Instead, to overcome this, I added an option to the add receipt page to browse for an image. Therefore, the user can take a receipt of an image at anytime and then save use that the next time they are connected to the internet. Another possible solution would be to implement PouchDB on the client and CouchDB on the server and have them sync automatically.
+* Client-managed authentication  
+Currently a server-managed authentication flow is used to authenticate users. While this is the easier and quicker of the two to implement, the client-managed authentication flow would offer a better user experience and should be considered as a possible enhancement.
+
+### Conclusion
+After completing this project I have found that there is still significantly more work involved in developing a cross-platform application. Due to differences between platforms I was unable to implement some useful functionality that would improve the user experience. However, I have found workarounds for each of these situations. If I were to do this project again, due to the timeline and scope for this project, I would only develop for UWP. Xamarin is useful for simple apps but when dealing with even moderately complex applications the project can get quite difficult to manage quite quick. The plugins available for Xamarin solve this problem to an extent, but not entirely.s
