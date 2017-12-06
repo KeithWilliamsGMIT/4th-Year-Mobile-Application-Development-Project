@@ -135,6 +135,9 @@
   <data name="txtLoadingLabel" xml:space="preserve">
     <value>LOADING...</value>
   </data>
+  <data name="txtLoggingYouInLabel" xml:space="preserve">
+    <value>We're logging you in</value>
+  </data>
   <data name="txtLoginPageTitle" xml:space="preserve">
     <value>DigiReceipt</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="txtNoReceiptsLabel" xml:space="preserve">
     <value>No Receipts Found!</value>
+  </data>
+  <data name="txtPleaseWaitLabel" xml:space="preserve">
+    <value>Please Wait...</value>
   </data>
   <data name="txtPriceLabel" xml:space="preserve">
     <value>Price</value>

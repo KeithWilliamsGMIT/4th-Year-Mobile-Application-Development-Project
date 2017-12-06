@@ -116,6 +116,15 @@ namespace DigiReceipt.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to We&apos;re logging you in.
+        /// </summary>
+        internal static string txtLoggingYouInLabel {
+            get {
+                return ResourceManager.GetString("txtLoggingYouInLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DigiReceipt.
         /// </summary>
         internal static string txtLoginPageTitle {
@@ -175,6 +184,15 @@ namespace DigiReceipt.Resx {
         internal static string txtNoReceiptsLabel {
             get {
                 return ResourceManager.GetString("txtNoReceiptsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please Wait....
+        /// </summary>
+        internal static string txtPleaseWaitLabel {
+            get {
+                return ResourceManager.GetString("txtPleaseWaitLabel", resourceCulture);
             }
         }
         
