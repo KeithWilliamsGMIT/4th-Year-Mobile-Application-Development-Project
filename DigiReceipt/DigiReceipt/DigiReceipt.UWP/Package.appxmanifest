@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="698196c4-e0a1-498a-9a1a-cd332aaa3cf4" Publisher="CN=Keith" Version="1.0.0.0" />
+  <Identity Name="22252KeithWilliams.DigiReceipt" Publisher="CN=141762A9-ABE1-4CB3-B2A3-08DBF78A65D8" Version="1.1.0.0" />
   <mp:PhoneIdentity PhoneProductId="698196c4-e0a1-498a-9a1a-cd332aaa3cf4" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>DigiReceipt.UWP</DisplayName>
-    <PublisherDisplayName>Keith</PublisherDisplayName>
+    <DisplayName>DigiReceipt</DisplayName>
+    <PublisherDisplayName>Keith Williams</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
@@ -15,10 +15,10 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="DigiReceipt.UWP.App">
-      <uap:VisualElements DisplayName="DigiReceipt" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Official DigiReceipt application for UWP." BackgroundColor="transparent">
+      <uap:VisualElements DisplayName="DigiReceipt" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Official DigiReceipt application for UWP." BackgroundColor="gold">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" ShortName="DigiReceipt">
         </uap:DefaultTile>
-        <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="transparent" />
+        <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="gold" />
         <uap:InitialRotationPreference>
           <uap:Rotation Preference="portrait" />
           <uap:Rotation Preference="portraitFlipped" />

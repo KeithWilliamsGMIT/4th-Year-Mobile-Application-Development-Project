@@ -9,6 +9,7 @@ using Android.OS;
 
 using Microsoft.WindowsAzure.MobileServices;
 using System.Threading.Tasks;
+using Plugin.Permissions;
 
 namespace DigiReceipt.Droid
 {
@@ -43,7 +44,12 @@ namespace DigiReceipt.Droid
 
             return success;
         }
-        
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+        {
+            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
         protected override void OnCreate(Bundle bundle)
         {
             TabLayoutResource = Resource.Layout.Tabbar;

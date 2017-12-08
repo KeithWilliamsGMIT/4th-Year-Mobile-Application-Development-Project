@@ -121,7 +121,7 @@
     <value>Add Receipt</value>
   </data>
   <data name="txtAddReceiptPageTitle" xml:space="preserve">
-    <value>New Receipt</value>
+    <value>Save Receipt</value>
   </data>
   <data name="txtBackButton" xml:space="preserve">
     <value>Back</value>
@@ -173,6 +173,9 @@
   </data>
   <data name="txtSaveReceiptButton" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="txtSavingLabel" xml:space="preserve">
+    <value>SAVING...</value>
   </data>
   <data name="txtSelectPhotoButton" xml:space="preserve">
     <value>Select Photo</value>

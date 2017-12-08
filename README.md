@@ -90,7 +90,7 @@ The following is a list of project outcomes.
   * Used GitHub Wiki
   * Develop the application in an iterative and incremental manner.
 * Deployed the web service to Azure and the MongoDB is hosted on MLab.
-* Submit the finished application to Windows Store and Play Store.
+* Submit the finished application to Windows Store (Currently planning on also publishing to Play Store).
 
 ### Enhancements
 * Extract data from image of receipt  

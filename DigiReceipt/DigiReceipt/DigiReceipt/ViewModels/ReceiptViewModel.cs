@@ -21,6 +21,9 @@ namespace DigiReceipt.ViewModels
         public ICommand SelectPhotoCommand { get; private set; }
         public ICommand SaveReceiptCommand { get; private set; }
 
+        // Determine if a receipt is currently being saved.
+        public bool isSaving = false;
+
         public ReceiptViewModel(ReceiptModel receipt = null) : base(receipt) {
             // Setup commands.
             TakePhotoCommand = new Command(async () => await OnTakePhoto());
@@ -65,6 +68,15 @@ namespace DigiReceipt.ViewModels
             get { return This.Receipt.Price; }
             set {
                 SetProperty(This.Receipt.Price, value, () => This.Receipt.Price = value);
+            }
+        }
+
+        public bool IsSaving
+        {
+            get { return isSaving; }
+            set {
+                isSaving = value;
+                RaisePropertyChanged(nameof(IsSaving));
             }
         }
 
@@ -142,6 +154,8 @@ namespace DigiReceipt.ViewModels
 
             if (IsOnline)
             {
+                IsSaving = true;
+
                 if (This.Receipt.ReceiptId == null || This.Receipt.ReceiptId == String.Empty)
                 {
                     await This.Create();
@@ -150,6 +164,8 @@ namespace DigiReceipt.ViewModels
                 {
                     await This.Update();
                 }
+
+                IsSaving = false;
 
                 await Application.Current.MainPage.Navigation.PushAsync(new ViewReceipts());
             }

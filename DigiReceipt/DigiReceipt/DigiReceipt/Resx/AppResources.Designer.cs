@@ -71,7 +71,7 @@ namespace DigiReceipt.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New Receipt.
+        ///   Looks up a localized string similar to Save Receipt.
         /// </summary>
         internal static string txtAddReceiptPageTitle {
             get {
@@ -229,6 +229,15 @@ namespace DigiReceipt.Resx {
         internal static string txtSaveReceiptButton {
             get {
                 return ResourceManager.GetString("txtSaveReceiptButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SAVING....
+        /// </summary>
+        internal static string txtSavingLabel {
+            get {
+                return ResourceManager.GetString("txtSavingLabel", resourceCulture);
             }
         }
         

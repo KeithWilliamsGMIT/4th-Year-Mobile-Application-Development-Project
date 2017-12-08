@@ -1,0 +1,2 @@
+MainPackage=C:\Users\Keith\Documents\Project\DigiReceipt\DigiReceipt\DigiReceipt.UWP\bin\x64\Release\Upload\DigiReceipt.UWP_1.1.0.0_x64.appx
+SymbolPackage=C:\Users\Keith\Documents\Project\DigiReceipt\DigiReceipt\DigiReceipt.UWP\AppPackages\DigiReceipt.UWP_1.1.0.0\DigiReceipt.UWP_1.1.0.0_x64.appxsym
