@@ -5,7 +5,7 @@ using System.Resources;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace DigiReceipt
+namespace DigiReceipt.Markup
 {
     /// <summary>
     /// A markup extension that exposes the RESX resources to XAML.

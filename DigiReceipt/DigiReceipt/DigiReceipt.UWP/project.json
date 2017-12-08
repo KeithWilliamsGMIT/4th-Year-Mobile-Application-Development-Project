@@ -1,9 +1,12 @@
 ﻿{
   "dependencies": {
     "Microsoft.Azure.Mobile.Client": "4.0.2",
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3",
-    "Xam.Plugin.Media": "3.0.1",
-    "Xamarin.Forms": "2.4.0.38779"
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
+    "Microsoft.NETNative.Analyzer": "1.0.0",
+    "Newtonsoft.Json": "9.0.1",
+    "Xam.Plugin.Connectivity": "3.0.3",
+    "Xam.Plugin.Media": "2.6.2",
+    "Xamarin.Forms": "2.5.0.121934"
   },
   "frameworks": {
     "uap10.0": {}

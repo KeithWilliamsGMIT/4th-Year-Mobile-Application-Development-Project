@@ -5,9 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace DigiReceipt
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Login : ContentPage
     {
         private LoginViewModel loginViewModel;

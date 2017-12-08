@@ -1,5 +1,6 @@
 ﻿using DigiReceipt.Data;
 using DigiReceipt.Models;
+using Plugin.Connectivity;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using System;
@@ -91,37 +92,48 @@ namespace DigiReceipt.ViewModels
             }
         }
 
+        public bool IsOnline
+        {
+            get { return CrossConnectivity.Current.IsConnected; }
+        }
+
         /// <summary>
         /// Load the next batch of receipts and append them to the list.
         /// </summary>
         /// <returns></returns>
         private async Task OnLoadNextReceipts()
         {
-            if (!IsLoading && !isFinishedLoading) {
-                IsLoading = true;
+            RaisePropertyChanged(nameof(IsOnline));
 
-                long lastTimestamp = IssuedAfter.AddDays(1).Ticks;
-
-                if (Receipts.Count > 0)
+            if (IsOnline)
+            {
+                if (!IsLoading && !isFinishedLoading)
                 {
-                    lastTimestamp = Receipts[Receipts.Count - 1].IssuedOn.Ticks;
+                    IsLoading = true;
+
+                    long lastTimestamp = IssuedAfter.AddDays(1).Ticks;
+
+                    if (Receipts.Count > 0)
+                    {
+                        lastTimestamp = Receipts[Receipts.Count - 1].IssuedOn.Ticks;
+                    }
+
+                    List<Receipt> newReceipts = await This.Retrieve(lastTimestamp);
+
+                    foreach (var receipt in newReceipts)
+                    {
+                        ReceiptModel model = new ReceiptModel(receipt);
+                        ReceiptViewModel viewModel = new ReceiptViewModel(model);
+                        Receipts.Add(viewModel);
+                    }
+
+                    if (newReceipts.Count < 5)
+                    {
+                        isFinishedLoading = true;
+                    }
+
+                    IsLoading = false;
                 }
-
-                List<Receipt> newReceipts = await This.Retrieve(lastTimestamp);
-
-                foreach (var receipt in newReceipts)
-                {
-                    ReceiptModel model = new ReceiptModel(receipt);
-                    ReceiptViewModel viewModel = new ReceiptViewModel(model);
-                    Receipts.Add(viewModel);
-                }
-
-                if (newReceipts.Count < 5)
-                {
-                    isFinishedLoading = true;
-                }
-
-                IsLoading = false;
             }
         }
 
@@ -132,12 +144,17 @@ namespace DigiReceipt.ViewModels
         /// <returns></returns>
         private async Task OnDeleteReceipt(object obj)
         {
-            ReceiptViewModel receipt = (ReceiptViewModel)obj;
-            await receipt.DeleteReceipt();
-            SelectedItem = null;
-            Receipts.Remove(receipt);
-            RaisePropertyChanged(nameof(Receipts));
-            RaisePropertyChanged(nameof(HasNoReceipts));
+            RaisePropertyChanged(nameof(IsOnline));
+
+            if (IsOnline)
+            {
+                ReceiptViewModel receipt = (ReceiptViewModel)obj;
+                await receipt.DeleteReceipt();
+                SelectedItem = null;
+                Receipts.Remove(receipt);
+                RaisePropertyChanged(nameof(Receipts));
+                RaisePropertyChanged(nameof(HasNoReceipts));
+            }
         }
 
         /// <summary>

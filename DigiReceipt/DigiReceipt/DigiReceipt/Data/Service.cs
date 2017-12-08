@@ -15,12 +15,15 @@ namespace DigiReceipt.Data
         private const string URL_USER_RECEIPTS_ISSUED_ON = URL_BASE + "/{0}/receipts/{1}";
         private const string URL_USER_RECEIPT_ID = URL_BASE + "/{0}/receipt/{1}";
 
+        private const string STATUS = "status";
+        private const string SUCCESS = "success";
+
         /// <summary>
         /// Send the given receipt to the web service to be saved.
         /// </summary>
         /// <param name="receipt"></param>
         /// <returns></returns>
-        public static async Task<dynamic> Create(Receipt receipt)
+        public static async Task<bool> Create(Receipt receipt)
         {
             HttpClient client = new HttpClient();
 
@@ -35,19 +38,26 @@ namespace DigiReceipt.Data
                             { "timestamp", receipt.Timestamp }
                         };
             
-            HttpContent content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json");
+            try {
+                HttpContent content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json");
 
-            // Post the data and wait for a response from the server.
-            var response = await client.PostAsync(String.Format(URL_USER_RECEIPT, id), content);
+                // Post the data and wait for a response from the server.
+                var response = await client.PostAsync(String.Format(URL_USER_RECEIPT, id), content);
 
-            dynamic data = null;
+                if (response != null)
+                {
+                    string json = response.Content.ReadAsStringAsync().Result;
+                    Dictionary<string, string> dictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
 
-            if (response != null)
-            {
-                data = response.Content.ReadAsStringAsync().Result;
+                    return dictionary[STATUS].Equals(SUCCESS);
+                }
+
+                return false;
             }
-
-            return data;
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -55,7 +65,7 @@ namespace DigiReceipt.Data
         /// </summary>
         /// <param name="receipt"></param>
         /// <returns></returns>
-        public static async Task<dynamic> Update(Receipt receipt)
+        public static async Task<bool> Update(Receipt receipt)
         {
             HttpClient client = new HttpClient();
 
@@ -69,19 +79,27 @@ namespace DigiReceipt.Data
                             { "price", receipt.Price },
                         };
 
-            HttpContent content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json");
-
-            // Post the data and wait for a response from the server.
-            var response = await client.PutAsync(String.Format(URL_USER_RECEIPT_ID, id, receipt.ReceiptId), content);
-
-            dynamic data = null;
-
-            if (response != null)
+            try
             {
-                data = response.Content.ReadAsStringAsync().Result;
-            }
+                HttpContent content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json");
 
-            return data;
+                // Post the data and wait for a response from the server.
+                var response = await client.PutAsync(String.Format(URL_USER_RECEIPT_ID, id, receipt.ReceiptId), content);
+                
+                if (response != null)
+                {
+                    string json = response.Content.ReadAsStringAsync().Result;
+                    Dictionary<string, string> dictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+
+                    return dictionary[STATUS].Equals(SUCCESS);
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -114,24 +132,31 @@ namespace DigiReceipt.Data
         /// Send a request to the web service to delete the receipt with the given id.
         /// </summary>
         /// <returns></returns>
-        public static async Task<dynamic> Delete(string ReceiptID)
+        public static async Task<bool> Delete(string ReceiptID)
         {
             HttpClient client = new HttpClient();
 
             // Get the current users id to determine who the receipt belongs to.
             string id = AuthenticationManager.DefaultAuthenticationManager.CurrentUser.UserId.Split(':')[1];
 
-            // Get the data and wait for a response from the server.
-            var response = await client.DeleteAsync(String.Format(URL_USER_RECEIPT_ID, id, ReceiptID));
-
-            dynamic data = null;
-
-            if (response != null)
+            try
             {
-                data = response.Content.ReadAsStringAsync().Result;
-            }
+                // Get the data and wait for a response from the server.
+                var response = await client.DeleteAsync(String.Format(URL_USER_RECEIPT_ID, id, ReceiptID));
+                
+                if (response != null)
+                {
+                    string json = response.Content.ReadAsStringAsync().Result;
+                    Dictionary<string, string> dictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
 
-            return data;
+                    return dictionary[STATUS].Equals(SUCCESS);
+                }
+
+                return false;
+            } catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 }

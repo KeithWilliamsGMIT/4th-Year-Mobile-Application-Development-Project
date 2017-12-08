@@ -1,14 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:DigiReceipt"
+             xmlns:markup="clr-namespace:DigiReceipt.Markup"
+             xmlns:converters="clr-namespace:DigiReceipt.Converters"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              x:Class="DigiReceipt.AddReceipt"
              Style="{StaticResource PageStyle}"
-             Title="{local:Translate txtAddReceiptPageTitle}">
+             Title="{markup:Translate txtAddReceiptPageTitle}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="{local:Translate txtBackButton}" Icon="Icons/back.png" Clicked="OnBack"/>
+        <ToolbarItem Text="{markup:Translate txtBackButton}" Icon="Icons/back.png" Clicked="OnBack"/>
     </ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BooleanConverter x:Key="BooleanConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.Content>
         <Grid>
@@ -18,33 +25,42 @@
             </Grid.RowDefinitions>
             
             <BoxView Color="Black"/>
-            <Label Text="{local:Translate txtNoImageLabel}" TextColor="White" IsVisible="{Binding HasNoImage}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            <Label Text="{markup:Translate txtNoImageLabel}" TextColor="White" IsVisible="{Binding HasNoImage}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
             <Image Source="{Binding Image, Mode=OneWay}" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
 
             <StackLayout Grid.Row="1">
-                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                    <!-- Take a picture with the camera -->
-                    <Button Text="{local:Translate txtTakePhotoButton}" Command="{Binding TakePhotoCommand}" HorizontalOptions="FillAndExpand"/>
+                <StackLayout HorizontalOptions="Fill" VerticalOptions="Fill" IsVisible="{Binding IsSaving, Converter={StaticResource BooleanConverter}}">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <!-- Take a picture with the camera -->
+                        <Button Text="{markup:Translate txtTakePhotoButton}" Command="{Binding TakePhotoCommand}" HorizontalOptions="FillAndExpand"/>
 
-                    <!-- Select a picture from the users device -->
-                    <Button Text="{local:Translate txtSelectPhotoButton}" Command="{Binding SelectPhotoCommand}" HorizontalOptions="FillAndExpand"/>
-                </StackLayout>
+                        <!-- Select a picture from the users device -->
+                        <Button Text="{markup:Translate txtSelectPhotoButton}" Command="{Binding SelectPhotoCommand}" HorizontalOptions="FillAndExpand"/>
+                    </StackLayout>
 
-                <!-- Choose the date which the receipt was issued on -->
-                <Label Text="{local:Translate txtIssuedOnLabel}"/>
+                    <!-- Choose the date which the receipt was issued on -->
+                    <Label Text="{markup:Translate txtIssuedOnLabel}"/>
 
-                <StackLayout>
-                    <DatePicker VerticalOptions="CenterAndExpand" Date="{Binding IssuedOn, Mode=TwoWay}" MaximumDate="{x:Static sys:DateTime.Now}">
-                        <DatePicker.Format>dd-MM-yyyy</DatePicker.Format>
-                    </DatePicker>
-                </StackLayout>
+                    <StackLayout>
+                        <DatePicker VerticalOptions="CenterAndExpand" Date="{Binding IssuedOn, Mode=TwoWay}" MaximumDate="{x:Static sys:DateTime.Now}">
+                            <DatePicker.Format>dd-MM-yyyy</DatePicker.Format>
+                        </DatePicker>
+                    </StackLayout>
 
-                <!-- Enter price on receipt -->
-                <Label Text="{local:Translate txtPriceLabel}"/>
-                <Entry Text="{Binding Price, Mode=TwoWay}"/>
+                    <!-- Enter price on receipt -->
+                    <Label Text="{markup:Translate txtPriceLabel}"/>
+                    <Entry Text="{Binding Price, Mode=TwoWay}"/>
                 
-                <!-- Save the new receipt -->
-                <Button Text="{local:Translate txtSaveReceiptButton}" Command="{Binding SaveReceiptCommand}"/>
+                    <!-- Save the new receipt -->
+                    <Button Text="{markup:Translate txtSaveReceiptButton}" Command="{Binding SaveReceiptCommand}"/>
+
+                    <!-- Offline message -->
+                    <Label Text="{markup:Translate txtOfflineLabel}" BackgroundColor="Black" TextColor="White" IsVisible="{Binding IsOnline, Converter={StaticResource BooleanConverter}}"/>
+                </StackLayout>
+
+                <StackLayout HorizontalOptions="Fill" VerticalOptions="Fill" IsVisible="{Binding IsSaving}">
+                    <Label Text="{markup:Translate txtSavingLabel}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                </StackLayout>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

@@ -1,28 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:DigiReceipt"
+             xmlns:markup="clr-namespace:DigiReceipt.Markup"
+             xmlns:converters="clr-namespace:DigiReceipt.Converters"
              x:Class="DigiReceipt.Login"
              Style="{StaticResource PageStyle}"
-             Title="{local:Translate txtLoginPageTitle}">
+             Title="{markup:Translate txtLoginPageTitle}">
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <local:BooleanConverter x:Key="BooleanConverter"/>
+            <converters:BooleanConverter x:Key="BooleanConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
     
     <ContentPage.Content>
         <StackLayout Orientation="Vertical" HorizontalOptions="Fill" VerticalOptions="Fill">
             <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" IsVisible="{Binding IsLoggingIn, Converter={StaticResource BooleanConverter}}">
-                <Label Text="{local:Translate txtLoginTitle}" HorizontalOptions="Center" FontSize="Medium" FontAttributes="Bold"/>
-                <Button Text="{local:Translate txtLoginWithGoogleButton}" Style="{StaticResource LoginButtonStyle}" Command="{Binding GoogleLoginCommand}" BackgroundColor="#DE4A31" Image="Icons/google.png"/>
-                <Button Text="{local:Translate txtLoginWithMicrosoftButton}" Style="{StaticResource LoginButtonStyle}" Command="{Binding MicrosoftLoginCommand}" BackgroundColor="#00ADEF" Image="Icons/microsoft.png"/>
+                <Label Text="{markup:Translate txtLoginTitle}" HorizontalOptions="Center" FontSize="Medium" FontAttributes="Bold"/>
+                <Button Text="{markup:Translate txtLoginWithGoogleButton}" Style="{StaticResource LoginButtonStyle}" Command="{Binding GoogleLoginCommand}" BackgroundColor="#DE4A31" Image="Icons/google.png"/>
+                <Button Text="{markup:Translate txtLoginWithMicrosoftButton}" Style="{StaticResource LoginButtonStyle}" Command="{Binding MicrosoftLoginCommand}" BackgroundColor="#00ADEF" Image="Icons/microsoft.png"/>
             </StackLayout>
 
             <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsVisible="{Binding IsLoggingIn}">
-                <Label Text="{local:Translate txtPleaseWaitLabel}" HorizontalOptions="Center" FontSize="Large"/>
-                <Label Text="{local:Translate txtLoggingYouInLabel}" HorizontalOptions="Center" FontSize="Small"/>
+                <Label Text="{markup:Translate txtPleaseWaitLabel}" HorizontalOptions="Center" FontSize="Large"/>
+                <Label Text="{markup:Translate txtLoggingYouInLabel}" HorizontalOptions="Center" FontSize="Small"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
